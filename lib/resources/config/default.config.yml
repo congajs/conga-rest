@@ -5,5 +5,5 @@ rest:
 
     model:
         paths:
-            - demo-bundle:model
-            - other-bundle:model
+            # - demo-bundle:model
+            # - other-bundle:model
