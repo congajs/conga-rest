@@ -19,7 +19,8 @@
   "author": "Marc Roulias",
   "license": "MIT",
   "dependencies": {
-    "conga-annotations": "0.1.5"
+    "conga-annotations": "0.1.5",
+	"lodash": "*"
   },
   "devDependencies": {
 
