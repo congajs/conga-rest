@@ -1,6 +1,6 @@
 {
   "name": "conga-rest",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Conga.js bundle which adds REST functionality to a project",
   "directories": {
     "test": "test"
