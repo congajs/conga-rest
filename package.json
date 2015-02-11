@@ -1,6 +1,6 @@
 {
   "name": "conga-rest",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Conga.js bundle which adds REST functionality to a project",
   "directories": {
     "test": "test"
@@ -26,7 +26,7 @@
   "license": "MIT",
   "dependencies": {
     "conga-annotations": "latest",
-	"lodash": "*"
+	"lodash": "v2.4.1"
   },
   "devDependencies": {
 
