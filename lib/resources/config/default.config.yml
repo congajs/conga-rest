@@ -1,9 +1,0 @@
-rest:
-
-    serializer: conga-rest:serializer/default
-    formatter: @conga.rest.formatter.default
-
-    model:
-        paths:
-            # - demo-bundle:model
-            # - other-bundle:model

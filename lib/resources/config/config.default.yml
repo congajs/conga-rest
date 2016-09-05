@@ -1,0 +1,18 @@
+rest:
+
+    # the serializer to use
+    serializer: conga-rest:rest/serializer/json-api
+
+    # the pagination builder to use (using page based)
+    pagination: conga-rest:rest/pagination/offset-based
+
+    # the attribute handling: camel, snake, hyphen
+    attribute.inflection: hyphen
+
+    # the linking root url
+    linking.root.url: "http://localhost:3000/api"
+
+    model:
+        paths:
+            # - demo-bundle:model
+            # - other-bundle:model
