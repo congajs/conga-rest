@@ -1,7 +1,7 @@
 parameters:
 
     # controller annotation handlers
-    conga.controller.rest.annotations.handler.constructor:     conga-rest:annotation/controller/handler/rest-controller
+    conga.controller.rest.annotations.handler.constructor: conga-rest:annotation/controller/handler/rest-controller
 
     # rest manager
     rest.manager.constructor: conga-rest:rest/manager
@@ -10,30 +10,25 @@ parameters:
     rest.methods:
 
         # normal uris
-        - { path : '/',    action: 'findAll', method: 'GET',    name: 'find.all' }
+        - { path : '/',    action: 'list', method: 'GET',       name: 'list' }
         - { path : '/:id', action: 'find',    method: 'GET',    name: 'find.one' }     
         - { path : '/',    action: 'create',  method: 'POST',   name: 'create' }
         - { path : '/:id', action: 'update',  method: 'PATCH',  name: 'update' }        
         - { path : '/:id', action: 'remove',  method: 'DELETE', name: 'delete' }
 
         # resource relationships
-        - { path : '/:id/relationships/:attribute', action: 'findRelationship', method: 'GET', name: 'relationships.self' }
+        - { path : '/:id/relationships/:attribute', action: 'findRelationship',   method: 'GET',   name: 'relationships.self' }
         - { path : '/:id/relationships/:attribute', action: 'updateRelationship', method: 'PATCH', name: 'relationships.update' }
-        - { path : '/:id/:attribute', action: 'findRelationship', method: 'GET', name: 'relationships.related' }
-
-
+        - { path : '/:id/:attribute',               action: 'findRelationship',   method: 'GET',   name: 'relationships.related' }
 
     # REST parameter mapping
     rest.parameters:
-        SORT:     sort
-        LIMIT:    limit
-        SKIP:     skip
-        CRITERIA: criteria
-
-    # REST result property names
-    rest.response.properties:
-        RESULTS:       results
-        TOTAL_RESULTS: totalResults
+        SORT:          sort
+        LIMIT:         limit
+        SKIP:          skip
+        FILTER:        filter
+        SPARSE_FIELDS: fields
+        INCLUDE:       include
 
 services:
 
@@ -47,11 +42,4 @@ services:
     rest.manager:
         constructor: "%rest.manager.constructor%"
         tags:
-            - { name: kernel.event, event: kernel.compile, method: onKernelCompile, priority: 1 }
-
-
-    # rest.formatter.default:
-
-    # rest.formatter.ember:
-
-
+            - { name: kernel.event, event: kernel.compile, method: onKernelCompile, priority: 0 }
