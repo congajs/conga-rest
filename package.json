@@ -24,17 +24,16 @@
   "license": "MIT",
   "dependencies": {
     "bass-nedb": "latest",
-    "change-case": "3.0.0",
+    "change-case": "3.0.1",
     "conga-annotations": "1.0.0",
     "conga-bass": "0.0.11",
+    "conga-validation": "0.0.5",
     "lodash": "4.17.4",
-    "object-sizeof": "1.1.1",
-    "qs": "6.2.1",
-    "recursive-readdir-synchronous": "0.0.3"
+    "qs": "6.4.0",
+    "recursive-readdir-sync": "1.0.6"
   },
   "devDependencies": {
     "conga-framework": "congajs/conga-framework#2.0.0-dev",
-    "conga-validation": "0.0.5",
     "jasmine": "^2.6.0",
     "request": "^2.81.0"
   },
