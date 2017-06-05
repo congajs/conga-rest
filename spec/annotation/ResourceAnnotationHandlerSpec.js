@@ -83,7 +83,7 @@ describe("ResourceAnnotationHandler", () => {
     });
 
     it("should have an attribute-to-property mapping for one-to-one attribute", () => {
-        expect(Article.prototype.__CONGA_REST__.attributesToProperties.author.relatedType).toEqual('users');
+        expect(Article.prototype.__CONGA_REST__.attributesToProperties.author.relatedType).toEqual('user');
     });
 
     it("should have an attribute-to-property mapping for one-to-many attribute", () => {

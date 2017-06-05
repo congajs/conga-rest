@@ -4,6 +4,7 @@ const ResourceAnnotationHandler = require('../../../lib/annotation/ResourceAnnot
 const JsonApiSerializer = require('../../../lib/specification/json-api/JsonApiSerializer');
 
 const Article = require('../../data/projects/sample/src/demo-bundle/lib/model/Article');
+const Comment = require('../../data/projects/sample/src/demo-bundle/lib/model/Comment');
 const User = require('../../data/projects/sample/src/demo-bundle/lib/model/User');
 
 describe("JsonApiSerializer", () => {
@@ -11,7 +12,7 @@ describe("JsonApiSerializer", () => {
     let handler;
     let serializer;
 
-    beforeEach(() => {
+    beforeAll(() => {
 
         const resolver = new Resolver();
 
@@ -42,61 +43,138 @@ describe("JsonApiSerializer", () => {
         let article;
         let res;
 
-        beforeEach(() => {
+        beforeAll(() => {
 
-            let user = new User();
-            user.id = 'abc123';
-            user.email = 'example@gmail.com';
-            user.name = 'John Doe';
-            user.createdAt = new Date();
+            let user1 = new User();
+            user1.id = 'user1';
+            user1.email = 'user1@gmail.com';
+            user1.name = 'John Doe';
+            user1.createdAt = new Date();
 
-            console.log(User.prototype);
+            let user2 = new User();
+            user2.id = 'user2';
+            user2.email = 'user2@gmail.com';
+            user2.name = 'Mary Jane';
+            user2.createdAt = new Date();
+
+            let comment1 = new Comment();
+            comment1.id = 'comment1';
+            comment1.body = "Comment #1";
+            comment1.user = user1;
+            comment1.createdAt = new Date();
+
+            let comment2 = new Comment();
+            comment2.id = 'comment2';
+            comment2.body = "Comment #2";
+            comment2.user = user2;
+            comment2.createdAt = new Date();
 
             article = new Article();
-            article.id = 'xzy123'
+            article.id = 'article1'
             article.title = 'my title';
             article.body = 'my body';
-            article.comments = [];
-            article.author = user;
+            article.comments = [comment1, comment2];
+            article.author = user1;
             article.notExposed = 'this shouldn\'t be exposed';
             article.createdAt = new Date();
 
-            res = serializer.serializeSingleResponse({}, {
-                data: article
+        });
+
+        describe("normal response", () => {
+
+            let res;
+
+            beforeAll(() => {
+
+                res = serializer.serializeSingleResponse({}, {
+                    data: article
+                });
+
             });
 
-            console.log(res);
-            console.log(res.data.relationships);
+            it("should have a jsonapi object", () => {
+                expect(res.jsonapi).toEqual({ version: '1.0' });
+            });
+
+            it("should have a data property", () => {
+                expect(res.data).not.toBeUndefined();
+            });
+
+            it("should have a data object", () => {
+                expect(typeof res.data).toEqual('object');
+            });
+
+            it("should have a links object in data", () => {
+                expect(typeof res.data.links).toEqual('object');
+            });
+
+            it("should have a relationships property", () => {
+                expect(res.data.relationships).not.toBeUndefined();
+            });
+
+            it("should have an array for one-to-many relationship data", () => {
+                expect(res.data.relationships.comments.data).toEqual(jasmine.any(Array));
+            });
+
+            it("should have an object for one-to-one relationship data", () => {
+                expect(res.data.relationships.author.data).toEqual(jasmine.any(Object));
+            });
+
+            it("should have an object with type & id for one-to-one relationship", () => {
+                expect(res.data.relationships.author.data).toEqual({ type: 'user', id: 'user1' });
+            });
+
+            it("should contain an object with type & id for one-to-many relationship", () => {
+                expect(res.data.relationships.comments.data[0]).toEqual({ type: 'comment', id: 'comment1' });
+            });
+        });
+
+        describe("sparse response", () => {
+
+            let res;
+
+            beforeAll(() => {
+
+                res = serializer.serializeSingleResponse({}, {
+                    data: article,
+                    sparseFields: { article: ['title', 'body'] }
+                });
+
+            });
+
+            it("should not have fields that weren't specified", () => {
+                expect(res.data.attributes.version).toBeUndefined();
+                expect(res.data.attributes.created_at).toBeUndefined();
+            });
 
         });
 
-        it("should have a jsonapi object", () => {
-            expect(res.jsonapi).toEqual({ version: '1.0' });
+        describe("normal response", () => {
+
+            let res;
+
+            beforeAll(() => {
+
+                res = serializer.serializeSingleResponse({}, {
+                    data: article,
+                    includes: [
+                        ['author'],
+                        ['comments', 'user']
+                    ]
+                });
+
+            });
+
+            it("should have a 'included' property", () => {
+                expect(res.included).not.toBeUndefined();
+            });
+
+            it("should contain includes for one-to-one", () => {
+
+            });
+
         });
 
-        it("should have a data property", () => {
-            expect(res.data).not.toBeUndefined();
-        });
-
-        it("should have a data object", () => {
-            expect(typeof res.data).toEqual('object');
-        });
-
-        it("should have a links object in data", () => {
-            expect(typeof res.data.links).toEqual('object');
-        });
-
-        it("should have a relationships property", () => {
-            expect(res.data.relationships).not.toBeUndefined();
-        });
-
-        it("should have an array for one-to-many relationship data", () => {
-            expect(res.data.relationships.comments.data).toEqual(jasmine.any(Array));
-        });
-
-        it("should have an object for one-to-one relationship data", () => {
-            expect(res.data.relationships.author.data).toEqual(jasmine.any(Object));
-        });
     });
 
 

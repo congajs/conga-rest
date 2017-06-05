@@ -1,6 +1,6 @@
 /**
  * @Bass:Document(collection="comments")
- * @Rest:Resource(type="comments")
+ * @Rest:Resource(type="comment")
  */
 module.exports = class Comment {
 
