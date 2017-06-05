@@ -1,37 +1,42 @@
 {
   "name": "conga-rest",
-  "version": "1.0.0",
+  "version": "2.0.0-dev",
   "description": "Conga.js bundle which adds REST functionality to a project",
   "directories": {
     "test": "test"
   },
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha test/*.js"
+    "test": "./node_modules/jasmine/bin/jasmine.js"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/congajs/conga-rest.git"
   },
-  "keywords": [
-
-  ],
+  "keywords": [],
   "author": "Marc Roulias",
   "contributors": [
-		{
-			"name": "Anthony Matarazzo" ,
-			"email": "email@anthonymatarazzo.com"
-		}
+    {
+      "name": "Anthony Matarazzo",
+      "email": "email@anthonymatarazzo.com"
+    }
   ],
   "license": "MIT",
   "dependencies": {
+    "bass-nedb": "latest",
+    "change-case": "3.0.0",
     "conga-annotations": "1.0.0",
-    "lodash": "v2.4.1",
+    "conga-bass": "0.0.11",
+    "lodash": "4.17.4",
+    "object-sizeof": "1.1.1",
     "qs": "6.2.1",
-    "object-sizeof": "1.1.1"
+    "recursive-readdir-synchronous": "0.0.3"
   },
   "devDependencies": {
-
+    "conga-framework": "2.0.0-dev",
+    "conga-validation": "0.0.5",
+    "jasmine": "^2.6.0",
+    "request": "^2.81.0"
   },
   "readmeFilename": "README.md"
 }

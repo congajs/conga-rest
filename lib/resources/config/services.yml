@@ -1,19 +1,25 @@
 parameters:
 
     # controller annotation handlers
-    conga.controller.rest.annotations.handler.constructor: conga-rest:annotation/controller/handler/rest-controller
+    conga.controller.rest.annotations.handler.constructor: conga-rest:annotation/controller/handler/RestControllerAnnotationHandler
+
+    # the response handler
+    conga.rest.response.handler.constructor: conga-rest:response/RestResponseHandler
+
+    # the serializer
+    conga.rest.serializer.constructor: conga-rest:rest/serializer/JsonApiRestSerializer
 
     # rest manager
-    rest.manager.constructor: conga-rest:rest/manager
+    rest.manager.constructor: conga-rest:rest/RestManager
 
     # default REST method mapping
     rest.methods:
 
         # normal uris
         - { path : '/',    action: 'list', method: 'GET',       name: 'list' }
-        - { path : '/:id', action: 'find',    method: 'GET',    name: 'find.one' }     
+        - { path : '/:id', action: 'find',    method: 'GET',    name: 'find.one' }
         - { path : '/',    action: 'create',  method: 'POST',   name: 'create' }
-        - { path : '/:id', action: 'update',  method: 'PATCH',  name: 'update' }        
+        - { path : '/:id', action: 'update',  method: 'PATCH',  name: 'update' }
         - { path : '/:id', action: 'remove',  method: 'DELETE', name: 'delete' }
 
         # resource relationships
@@ -36,10 +42,17 @@ services:
     conga.controller.rest.annotations.handler:
         constructor: "%conga.controller.rest.annotations.handler.constructor%"
         tags:
-            - { name: controller.annotation.handler, method: handleAnnotations }  
-   
+            - { name: controller.annotation.handler, method: handleAnnotations, priority: 1024 }
+
     # the REST manager
     rest.manager:
         constructor: "%rest.manager.constructor%"
         tags:
             - { name: kernel.event, event: kernel.compile, method: onKernelCompile, priority: 0 }
+
+    # conga_rest_serializer:
+    #     constructor: "%conga.rest.serializer.constructor%"
+
+    # the default json response handler
+    conga.rest.response.handler:
+        constructor: %conga.rest.response.handler.constructor%
