@@ -33,7 +33,7 @@
     "recursive-readdir-synchronous": "0.0.3"
   },
   "devDependencies": {
-    "conga-framework": "2.0.0-dev",
+    "conga-framework": "congajs/conga-framework#2.0.0-dev",
     "conga-validation": "0.0.5",
     "jasmine": "^2.6.0",
     "request": "^2.81.0"
