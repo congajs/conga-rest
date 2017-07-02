@@ -71,14 +71,12 @@ describe("Kernel", () => {
         }, (error, response, body) => {
             expect(response.statusCode).toEqual(200);
 
-            const json = JSON.parse(body);
-
-            expect(json.data.attributes['title']).toEqual('Test Title');
-            expect(json.data.attributes['body']).toEqual('This is a test article');
-            expect(json.data.id).not.toBeUndefined();
+            expect(body.data.attributes['title']).toEqual('Test Title');
+            expect(body.data.attributes['body']).toEqual('This is a test article');
+            expect(body.data.id).not.toBeUndefined();
 
             // hang on to the article id
-            articleId = json.data.id;
+            articleId = body.data.id;
 
             done();
         });
@@ -100,11 +98,9 @@ describe("Kernel", () => {
 
             expect(response.statusCode).toEqual(200);
 
-            const json = JSON.parse(body);
-
-            expect(json.data.attributes['title']).toEqual('Test Title');
-            expect(json.data.attributes['body']).toEqual('This is a test article');
-            expect(json.data.id).not.toBeUndefined();
+            expect(body.data.attributes['title']).toEqual('Test Title');
+            expect(body.data.attributes['body']).toEqual('This is a test article');
+            expect(body.data.id).not.toBeUndefined();
 
             done();
         });
@@ -126,13 +122,9 @@ describe("Kernel", () => {
 
             expect(response.statusCode).toEqual(200);
 
-            const json = JSON.parse(body);
-
-            console.log(body);
-
-            expect(json.data[0].attributes['title']).toEqual('Test Title');
-            expect(json.data[0].attributes['body']).toEqual('This is a test article');
-            expect(json.data[0].id).not.toBeUndefined();
+            expect(body.data[0].attributes['title']).toEqual('Test Title');
+            expect(body.data[0].attributes['body']).toEqual('This is a test article');
+            expect(body.data[0].id).not.toBeUndefined();
 
             done();
         });
