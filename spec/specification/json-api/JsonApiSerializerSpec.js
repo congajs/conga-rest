@@ -1,7 +1,8 @@
 const path = require('path');
-const Resolver = require('conga-framework/lib/namespace/Resolver');
+const Resolver = require('@conga/framework/lib/namespace/Resolver');
 const ResourceAnnotationHandler = require('../../../lib/annotation/ResourceAnnotationHandler');
 const JsonApiSerializer = require('../../../lib/specification/json-api/JsonApiSerializer');
+const RestResourceRegistry = require('../../../lib/rest/RestResourceRegistry');
 
 const Article = require('../../data/projects/sample/src/demo-bundle/lib/model/Article');
 const Comment = require('../../data/projects/sample/src/demo-bundle/lib/model/Comment');
@@ -21,7 +22,7 @@ describe("JsonApiSerializer", () => {
             path.join(__dirname, '..', '..', 'data', 'projects', 'sample', 'src', 'demo-bundle')
         );
 
-        handler = new ResourceAnnotationHandler(resolver);
+        handler = new ResourceAnnotationHandler(resolver, new RestResourceRegistry());
 
         const config = {
             'attribute.inflection': 'snake',

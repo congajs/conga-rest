@@ -4,9 +4,9 @@ bundles:
     all:
 
         # project bundles (from src/ directory)
-        - demo-bundle
+        - "demo-bundle"
 
         # core conga bundles (from node_modules/ directory)
-        - conga-bass
-        - conga-rest
-        - conga-validation
+        - "conga-bass"
+        - "@conga/framework-rest"
+        - "conga-validation"

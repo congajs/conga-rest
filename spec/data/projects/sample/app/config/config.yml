@@ -7,8 +7,8 @@ framework:
 
     # application settings
     app:
-        host:  %app.http.host%
-        port:  %app.http.port%
+        host: "%app.http.host%"
+        port: "%app.http.port%"
 
 # bass odm
 bass:
@@ -22,7 +22,7 @@ bass:
 
         nedb.default:
             adapter:  bass-nedb
-            directory: %kernel.var_path%/data/nedb
+            directory: "%kernel.var_path%/data/nedb"
 
     # the managers
     managers:
@@ -36,7 +36,7 @@ bass:
 # rest serialization
 rest:
 
-    attribute.inflection: hyphen
+    attribute.inflection: snake
 
     model:
         paths:

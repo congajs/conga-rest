@@ -1,4 +1,4 @@
-const Controller = require('conga-framework').Controller;
+const Controller = require('@conga/framework').Controller;
 
 /**
  * @Route("/")

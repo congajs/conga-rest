@@ -1,16 +1,25 @@
 parameters:
 
     # controller annotation handlers
-    conga.controller.rest.annotations.handler.constructor: conga-rest:annotation/controller/handler/RestControllerAnnotationHandler
+    conga.controller.rest.annotations.handler.constructor: "@conga/framework-rest:annotation/controller/handler/RestControllerAnnotationHandler"
+
+    # resource annotation handler
+    conga.rest.resource.annotation.handler.constructor: "@conga/framework-rest:annotation/ResourceAnnotationHandler"
+
+    # resource registry
+    conga.rest.resource.registry.constructor: "@conga/framework-rest:rest/RestResourceRegistry"
 
     # the response handler
-    conga.rest.response.handler.constructor: conga-rest:response/RestResponseHandler
+    conga.rest.response.handler.constructor: "@conga/framework-rest:response/RestResponseHandler"
 
     # the serializer
-    conga.rest.serializer.constructor: conga-rest:rest/serializer/JsonApiRestSerializer
+    conga.rest.serializer.constructor: "@conga/framework-rest:rest/serializer/JsonApiRestSerializer"
 
     # rest manager
-    rest.manager.constructor: conga-rest:rest/RestManager
+    rest.manager.constructor: "@conga/framework-rest:rest/RestManager"
+
+    # resource registry
+    conga.rest.resource.registry: "@conga/framework-rest:rest/RestResourceRegistry"
 
     # default REST method mapping
     rest.methods:
@@ -38,11 +47,21 @@ parameters:
 
 services:
 
-    # handler to process the rest annotations on controllers
+    # handler to process the REST annotations on controllers
     conga.controller.rest.annotations.handler:
         constructor: "%conga.controller.rest.annotations.handler.constructor%"
+        arguments: ["@conga.rest.resource.registry"]
         tags:
             - { name: controller.annotation.handler, method: handleAnnotations, priority: 1024 }
+
+    # handler to process the REST annotations on models
+    conga.rest.resource.annotation.handler:
+        constructor: "%conga.rest.resource.annotation.handler.constructor%"
+        arguments: ["@namespace.resolver", "@conga.rest.resource.registry"]
+
+    # registry which holds all of the metadata for resources
+    conga.rest.resource.registry:
+        constructor: "%conga.rest.resource.registry.constructor%"
 
     # the REST manager
     rest.manager:
@@ -55,4 +74,4 @@ services:
 
     # the default json response handler
     conga.rest.response.handler:
-        constructor: %conga.rest.response.handler.constructor%
+        constructor: "%conga.rest.response.handler.constructor%"

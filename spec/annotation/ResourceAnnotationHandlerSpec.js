@@ -1,7 +1,7 @@
 const path = require('path');
-const Resolver = require('conga-framework/lib/namespace/Resolver');
+const Resolver = require('@conga/framework/lib/namespace/Resolver');
 const ResourceAnnotationHandler = require('../../lib/annotation/ResourceAnnotationHandler');
-
+const RestResourceRegistry = require('../../lib/rest/RestResourceRegistry');
 
 describe("ResourceAnnotationHandler", () => {
 
@@ -13,7 +13,7 @@ describe("ResourceAnnotationHandler", () => {
         const resolver = new Resolver();
         resolver.register('demo-bundle', path.join(__dirname, '..', 'data', 'projects', 'sample', 'src', 'demo-bundle'));
 
-        handler = new ResourceAnnotationHandler(resolver);
+        handler = new ResourceAnnotationHandler(resolver, new RestResourceRegistry());
 
         const config = {
             'attribute.inflection': 'snake',
