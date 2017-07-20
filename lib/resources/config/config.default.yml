@@ -1,10 +1,49 @@
 rest:
 
     # the specification class to use
-    specification: "@conga/framework-rest:specification/json-api/JsonApiRestSpecification"
+    # specification: "@conga/framework-rest:specification/json-api/JsonApiRestSpecification"
 
-    # the attribute handling: camel, snake, hyphen
-    attribute.inflection: hyphen
+    # this defines what the specification contains
+    specification:
+
+        # the attribute handling: camel, snake, hyphen
+        attribute.inflection: snake
+
+        # the request/response content-type
+        content.type: "application/vnd.api+json"
+
+        # the request/response format serializer
+        serializer: "@conga/framework-rest/specification/json-api/JsonApiRestSerializer"
+
+        # the request validator
+        validator: "@conga/framework-rest/specification/json-api/JsonApiRestRequestValidator"
+
+        # this defines all of the request query handlers
+        query:
+
+            # the source of all query parameters (querystring or body)
+            source: querystring
+
+            # the pagination handler
+            pagination: "@conga/framework-rest/query/pagination/OffsetBasedPagination"
+
+            # the filtering handler
+            filtering: "@conga/framework-rest/query/filtering/GenericFiltering"
+
+            # the sort handler
+            sorting: "@conga/framework-rest/query/sorting/GenericSorting"
+
+            # the sparse fields handler
+            sparse: "@conga/framework-rest/query/sparse/GenericSparse"
+
+            # the includes handler
+            includes: "@conga/framework-rest/query/includes/GenericIncludes"
+
+        # this defines all of the error handling
+        error:
+
+            # the error response formatter
+            formatter: "@conga/framework-rest/error/GenericErrorFormatter"
 
     # the paths to the models
     model:
