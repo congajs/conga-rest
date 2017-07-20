@@ -1,8 +1,5 @@
 rest:
 
-    # the specification class to use
-    # specification: "@conga/framework-rest:specification/json-api/JsonApiRestSpecification"
-
     # this defines what the specification contains
     specification:
 
@@ -10,33 +7,33 @@ rest:
         attribute.inflection: snake
 
         # the request/response content-type
-        content.type: "application/vnd.api+json"
+        content-type: "application/vnd.api+json"
 
         # the request/response format serializer
         serializer: "@conga/framework-rest/specification/json-api/JsonApiRestSerializer"
 
-        # the request validator
+        # the request validator (to validate format of request)
         validator: "@conga/framework-rest/specification/json-api/JsonApiRestRequestValidator"
 
-        # this defines all of the request query handlers
+        # this defines all of the request query parsers/handlers
         query:
 
             # the source of all query parameters (querystring or body)
             source: querystring
 
             # the pagination handler
-            pagination: "@conga/framework-rest/query/pagination/OffsetBasedPagination"
+            pagination: "@conga/framework-rest/query/pagination/OffsetPagination"
 
-            # the filtering handler
+            # the filtering parser
             filtering: "@conga/framework-rest/query/filtering/GenericFiltering"
 
-            # the sort handler
+            # the sort parser
             sorting: "@conga/framework-rest/query/sorting/GenericSorting"
 
-            # the sparse fields handler
+            # the sparse fields parser
             sparse: "@conga/framework-rest/query/sparse/GenericSparse"
 
-            # the includes handler
+            # the includes parser
             includes: "@conga/framework-rest/query/includes/GenericIncludes"
 
         # this defines all of the error handling
@@ -45,8 +42,8 @@ rest:
             # the error response formatter
             formatter: "@conga/framework-rest/error/GenericErrorFormatter"
 
-    # the paths to the models
-    model:
+    # the namespaced paths to the resource class directories
+    resource:
         paths:
             # - demo-bundle:model
             # - other-bundle:model
