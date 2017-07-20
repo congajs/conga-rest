@@ -10,10 +10,10 @@ rest:
         content-type: "application/vnd.api+json"
 
         # the request/response format serializer
-        serializer: "@conga/framework-rest/specification/json-api/JsonApiRestSerializer"
+        serializer: "@conga/framework-rest:specification/json-api/JsonApiRestSerializer"
 
         # the request validator (to validate format of request)
-        validator: "@conga/framework-rest/specification/json-api/JsonApiRestRequestValidator"
+        validator: "@conga/framework-rest:specification/json-api/JsonApiRestRequestValidator"
 
         # this defines all of the request query parsers/handlers
         query:
@@ -22,25 +22,25 @@ rest:
             source: querystring
 
             # the pagination handler
-            pagination: "@conga/framework-rest/query/pagination/OffsetPagination"
+            pagination: "@conga/framework-rest:query/pagination/OffsetPagination"
 
             # the filtering parser
-            filtering: "@conga/framework-rest/query/filtering/GenericFiltering"
+            filtering: "@conga/framework-rest:query/filtering/GenericFiltering"
 
             # the sort parser
-            sorting: "@conga/framework-rest/query/sorting/GenericSorting"
+            sorting: "@conga/framework-rest:query/sorting/GenericSorting"
 
             # the sparse fields parser
-            sparse: "@conga/framework-rest/query/sparse/GenericSparse"
+            sparse: "@conga/framework-rest:query/sparse/GenericSparse"
 
             # the includes parser
-            includes: "@conga/framework-rest/query/includes/GenericIncludes"
+            includes: "@conga/framework-rest:query/includes/GenericIncludes"
 
         # this defines all of the error handling
         error:
 
             # the error response formatter
-            formatter: "@conga/framework-rest/error/GenericErrorFormatter"
+            formatter: "@conga/framework-rest:error/GenericErrorFormatter"
 
     # the namespaced paths to the resource class directories
     resource:
