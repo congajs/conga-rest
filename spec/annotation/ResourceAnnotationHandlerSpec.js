@@ -48,12 +48,12 @@ describe("ResourceAnnotationHandler", () => {
 
     it("should have properties", () => {
         expect(Article.prototype.__CONGA_REST__.properties).not.toBeUndefined();
-        expect(Article.prototype.__CONGA_REST__.properties.length).toEqual(6);
+        expect(Article.prototype.__CONGA_REST__.properties.length).toEqual(7);
     });
 
     it("should have attribute to property mapping", () => {
         expect(Article.prototype.__CONGA_REST__.attributesToProperties).not.toBeUndefined();
-        expect(Object.keys(Article.prototype.__CONGA_REST__.attributesToProperties).length).toEqual(8);
+        expect(Object.keys(Article.prototype.__CONGA_REST__.attributesToProperties).length).toEqual(9);
     });
 
     it("should have mapped snake case attributes", () => {

@@ -25,15 +25,16 @@
   "dependencies": {
     "change-case": "3.0.1",
     "@conga/annotations": "1.0.0",
-    "conga-bass": "0.0.11",
     "lodash": "4.17.4",
     "qs": "6.4.0",
     "recursive-readdir-sync": "1.0.6"
   },
   "devDependencies": {
+    "bass": "latest",
     "bass-nedb": "latest",
     "@conga/framework": "latest",
-    "conga-validation": "0.0.5",
+    "@conga/framework-bass": "congajs/conga-bass#2.0.0-dev",
+    "@conga/framework-validation": "congajs/conga-validation#2.0.0-dev",
     "jasmine": "^2.6.0",
     "request": "^2.81.0"
   },

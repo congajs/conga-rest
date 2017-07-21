@@ -14,6 +14,12 @@ module.exports = class Article {
         this.id = null;
 
         /**
+         * @Bass:Field(type="Number", name="reference_id")
+         * @Rest:Attribute
+         */
+        this.referenceId = null;
+
+        /**
          * @Bass:Field(type="String", name="title")
          * @Rest:Attribute
          */

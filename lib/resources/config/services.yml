@@ -16,16 +16,16 @@ parameters:
     conga.rest.serializer.constructor: "@conga/framework-rest:rest/serializer/JsonApiRestSerializer"
 
     # rest manager
-    rest.manager.constructor: "@conga/framework-rest:rest/RestManager"
+    conga.rest.manager.constructor: "@conga/framework-rest:RestManager"
 
-    # resource registry
-    conga.rest.resource.registry: "@conga/framework-rest:rest/RestResourceRegistry"
+    # rest router
+    conga.rest.router.constructor: "@conga/framework-rest:router/RestRouter"
 
     # default REST method mapping
     rest.methods:
 
         # normal uris
-        - { path : '/',    action: 'list', method: 'GET',       name: 'list' }
+        - { path : '/',    action: 'list',    method: 'GET',    name: 'list' }
         - { path : '/:id', action: 'find',    method: 'GET',    name: 'find.one' }
         - { path : '/',    action: 'create',  method: 'POST',   name: 'create' }
         - { path : '/:id', action: 'update',  method: 'PATCH',  name: 'update' }
@@ -64,8 +64,8 @@ services:
         constructor: "%conga.rest.resource.registry.constructor%"
 
     # the REST manager
-    rest.manager:
-        constructor: "%rest.manager.constructor%"
+    conga.rest.manager:
+        constructor: "%conga.rest.manager.constructor%"
         tags:
             - { name: kernel.event, event: kernel.compile, method: onKernelCompile, priority: 0 }
 
@@ -75,3 +75,7 @@ services:
     # the default json response handler
     conga.rest.response.handler:
         constructor: "%conga.rest.response.handler.constructor%"
+
+    conga.rest.router:
+        constructor: "%conga.rest.router.constructor%"
+        arguments: ["@router"]

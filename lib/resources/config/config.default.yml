@@ -4,13 +4,13 @@ rest:
     specification:
 
         # the attribute handling: camel, snake, hyphen
-        attribute.inflection: snake
+        inflection: snake
 
         # the request/response content-type
         content-type: "application/vnd.api+json"
 
         # the request/response format serializer
-        serializer: "@conga/framework-rest:specification/json-api/JsonApiRestSerializer"
+        serializer: "@conga/framework-rest:specification/json-api/JsonApiSerializer"
 
         # the request validator (to validate format of request)
         validator: "@conga/framework-rest:specification/json-api/JsonApiRestRequestValidator"
@@ -18,7 +18,7 @@ rest:
         # this defines all of the request query parsers/handlers
         query:
 
-            # the source of all query parameters (querystring or body)
+            # the source of all query parameters ("querystring" or "body")
             source: querystring
 
             # the pagination handler

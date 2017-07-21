@@ -24,8 +24,8 @@ describe("Kernel", () => {
         );
 
         kernel.addBundlePaths({
-            'conga-bass': path.join(__dirname, '..', 'node_modules', 'conga-bass'),
-            'conga-validation': path.join(__dirname, '..', '..', 'conga-validation'), // CHANGE THIS!!!
+            '@conga/framework-bass': path.join(__dirname, '..', 'node_modules', '@conga', 'framework-bass'),
+            '@conga/framework-validation': path.join(__dirname, '..', 'node_modules', '@conga', 'framework-validation'), // CHANGE THIS!!!
             //'bass-nedb': path.join(__dirname, '..', 'node_modules', 'bass-nedb'),
             'demo-bundle': path.join(__dirname, '..', 'spec', 'data', 'projects', 'sample', 'src', 'demo-bundle'),
             '@conga/framework-rest': path.join(__dirname, '..')
@@ -37,9 +37,15 @@ describe("Kernel", () => {
             // need to wait a bit to make sure nedb connections are created
             setTimeout(() => {
 
-                done();
+                //console.log(kernel.container);
 
-            }, 500);
+                kernel.container.get('bass.fixture.runner').runFixtures(
+                    path.join(__dirname, 'data', 'projects', 'sample', 'app', 'bass', 'fixtures'),
+                    null,
+                    done
+                )
+
+            }, 1000);
 
         });
 
@@ -63,12 +69,14 @@ describe("Kernel", () => {
                     attributes: {
                         'title': 'Test Title',
                         'body': 'This is a test article',
-                        'hello-world': 'test'
+                        'hello-world': 'test',
+                        'reference_id': 0
                     }
                 }
             }
 
         }, (error, response, body) => {
+
             expect(response.statusCode).toEqual(200);
 
             expect(body.data.attributes['title']).toEqual('Test Title');
@@ -130,5 +138,81 @@ describe("Kernel", () => {
         });
 
     });
+
+    it("should load a sorted list of resources by a descending numeric attribute", (done) => {
+
+        request({
+
+            uri: 'http://localhost:5555/api/articles?sort=-reference_id',
+            method: 'GET',
+            json: true,
+            headers: {
+                'content-type': 'application/json'
+            }
+
+        }, (error, response, body) => {
+
+            expect(response.statusCode).toEqual(200);
+
+            expect(body.data[0].attributes['title']).toEqual('harness 24/365 experiences');
+            expect(body.data[0].attributes['reference_id']).toEqual(100);
+            expect(body.data[0].id).not.toBeUndefined();
+
+            done();
+        });
+
+    });
+
+    it("should load a sorted list of resources by a descending string attribute", (done) => {
+
+        request({
+
+            uri: 'http://localhost:5555/api/articles?sort=-title',
+            method: 'GET',
+            json: true,
+            headers: {
+                'content-type': 'application/json'
+            }
+
+        }, (error, response, body) => {
+
+            expect(response.statusCode).toEqual(200);
+
+            expect(body.data[0].attributes['title']).toEqual('zzz empower killer partnerships');
+            expect(body.data[0].attributes['reference_id']).toEqual(95);
+            expect(body.data[0].id).not.toBeUndefined();
+
+            done();
+        });
+
+    });
+
+    it("should load a sorted list of resources by an ascending string attribute", (done) => {
+
+        request({
+
+            uri: 'http://localhost:5555/api/articles?sort=title',
+            method: 'GET',
+            json: true,
+            headers: {
+                'content-type': 'application/json'
+            }
+
+        }, (error, response, body) => {
+
+            expect(response.statusCode).toEqual(200);
+
+            expect(body.data[0].attributes['title']).toEqual('zzz empower killer partnerships');
+            expect(body.data[0].attributes['reference_id']).toEqual(95);
+            expect(body.data[0].id).not.toBeUndefined();
+
+            done();
+        });
+
+    });
+
+
+
+
 
 });

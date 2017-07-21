@@ -7,6 +7,6 @@ bundles:
         - "demo-bundle"
 
         # core conga bundles (from node_modules/ directory)
-        - "conga-bass"
+        - "@conga/framework-bass"
         - "@conga/framework-rest"
-        - "conga-validation"
+        - "@conga/framework-validation"
