@@ -12,6 +12,12 @@ module.exports = class Comment {
          * @Rest:ID
          */
         this.id = null;
+        
+        /**
+         * @Bass:Field(type="Number", name="reference_id")
+         * @Rest:Attribute
+         */
+        this.referenceId = null;
 
         /**
          * @Bass:Field(type="String", name="body")

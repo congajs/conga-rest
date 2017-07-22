@@ -21,7 +21,7 @@ module.exports = class ArticleFixture extends AbstractFixture {
      * @return {Number}
      */
     getOrder() {
-        return 2;
+        return 3;
     }
 
     /**
@@ -30,7 +30,7 @@ module.exports = class ArticleFixture extends AbstractFixture {
      * @return {String}
      */
     getModelName() {
-        return 'Article';
+        return 'Comment';
     }
 
     /**
@@ -41,19 +41,26 @@ module.exports = class ArticleFixture extends AbstractFixture {
      */
     load(next) {
 
+console.log('loaded comment fixture');
+
+
         const manager = this.getManager();
 
-        this.mapFromFile(path.join(__dirname, 'data', 'articles.json'), (model, row, index, cb) => {
+        this.mapFromFile(path.join(__dirname, 'data', 'comments.csv'), (model, row, index, cb) => {
 
-            model.referenceId = parseInt(row.reference_id.replace('post-', ''));
-            model.title = row.title;
+            model.referenceId = parseInt(row.reference_id.replace('comment-', ''));
             model.body = row.body;
-            model.author = this.getReference('user-' + row.user_id);
+            model.user = this.getReference('user-' + row.user_id);
+            model.createdAt = new Date(row.created_at);
 
-            //console.log(row.reference_id);
             this.addReference(row.reference_id, model);
 
+            const article = this.getReference('post-' + row.article_id);
+
+            article.comments.push(model);
+            //
             manager.persist(model);
+            manager.persist(article);
 
         }, () => {
 
