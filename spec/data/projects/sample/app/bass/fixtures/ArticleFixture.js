@@ -43,15 +43,16 @@ module.exports = class ArticleFixture extends AbstractFixture {
 
         const manager = this.getManager();
 
-        this.mapFromFile(path.join(__dirname, 'data', 'articles.json'), (model, row, index, cb) => {
+        this.mapFromFile(path.join(__dirname, 'data', 'articles.csv'), (model, row, index, cb) => {
 
-            model.referenceId = parseInt(row.reference_id.replace('post-', ''));
+            model.referenceId = parseInt(row.id);
+            model.accountId = parseInt(row.account_id);
             model.title = row.title;
             model.body = row.body;
             model.author = this.getReference('user-' + row.user_id);
+            model.publishedAt = row.published_at;
 
-            //console.log(row.reference_id);
-            this.addReference(row.reference_id, model);
+            this.addReference('article-' + row.id, model);
 
             manager.persist(model);
 

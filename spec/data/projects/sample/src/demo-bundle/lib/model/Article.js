@@ -15,9 +15,15 @@ module.exports = class Article {
 
         /**
          * @Bass:Field(type="Number", name="reference_id")
-         * @Rest:Attribute
+         * @Rest:Attribute(type="Number", update=false)
          */
         this.referenceId = null;
+
+        /**
+         * @Bass:Field(type="Number", name="account_id")
+         * @Rest:Attribute(update=false)
+         */
+        this.accountId = null;
 
         /**
          * @Bass:Field(type="String", name="title")
@@ -48,6 +54,11 @@ module.exports = class Article {
          * @Rest:Attribute(expose=false)
          */
         this.notExposed = null;
+
+        /**
+         * @Bass:Field(type="Date", name="published_at")
+         */
+        this.publishedAt = null;
 
         /**
          * @Bass:Version

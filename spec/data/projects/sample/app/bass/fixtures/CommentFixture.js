@@ -41,21 +41,18 @@ module.exports = class ArticleFixture extends AbstractFixture {
      */
     load(next) {
 
-console.log('loaded comment fixture');
-
-
         const manager = this.getManager();
 
         this.mapFromFile(path.join(__dirname, 'data', 'comments.csv'), (model, row, index, cb) => {
 
-            model.referenceId = parseInt(row.reference_id.replace('comment-', ''));
+            model.referenceId = row.id;
             model.body = row.body;
             model.user = this.getReference('user-' + row.user_id);
-            model.createdAt = new Date(row.created_at);
+            model.publishedAt = new Date(row.created_at);
 
-            this.addReference(row.reference_id, model);
+            this.addReference('comment-' + row.id, model);
 
-            const article = this.getReference('post-' + row.article_id);
+            const article = this.getReference('article-' + row.article_id);
 
             article.comments.push(model);
             //

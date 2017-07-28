@@ -44,10 +44,9 @@ module.exports = class UserFixture extends AbstractFixture {
 
         const manager = this.getManager();
 
-        //console.log(manager);
-
         this.mapFromFile(path.join(__dirname, 'data', 'users.csv'), (model, row, index, cb) => {
 
+            model.referenceId = row.id;
             model.email = row.email;
             model.name = row.name;
             model.gender = row.gender;
@@ -57,7 +56,7 @@ module.exports = class UserFixture extends AbstractFixture {
             // @todo - encrypt this with the security bundle
             model.password = row.password;
 
-            this.addReference(row.reference_id, model);
+            this.addReference('user-' + row.id, model);
 
             manager.persist(model);
 

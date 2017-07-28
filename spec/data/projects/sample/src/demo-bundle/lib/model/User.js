@@ -14,6 +14,19 @@ module.exports = class User {
         this.id = null;
 
         /**
+         * @Bass:Field(type="Number", name="reference_id")
+         * @Rest:Attribute
+         */
+        this.referenceId = null;
+
+        /**
+         * @Bass:Field(type="String", name="internal_comment")
+         * @Rest:Attribute
+         * @Rest:Group(read=['ADMIN'], write=['ADMIN'])
+         */
+        this.internalComment = null;
+
+        /**
          * @Bass:Field(type="String", name="email")
          * @Rest:Attribute
          */
@@ -24,6 +37,12 @@ module.exports = class User {
          * @Rest:Attribute
          */
         this.name = null;
+
+        /**
+         * @Bass:Field(type="String", name="gender")
+         * @Rest:Attribute
+         */
+        this.gender = null;
 
         /**
          * @Bass:Version

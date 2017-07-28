@@ -21,6 +21,9 @@ parameters:
     # rest router
     conga.rest.router.constructor: "@conga/framework-rest:router/RestRouter"
 
+    # rest normalizer
+    conga.rest.normalizer.constructor: "@conga/framework-rest:specification/RestNormalizer"
+
     # default REST method mapping
     rest.methods:
 
@@ -36,14 +39,6 @@ parameters:
         - { path : '/:id/relationships/:attribute', action: 'updateRelationship', method: 'PATCH', name: 'relationships.update' }
         - { path : '/:id/:attribute',               action: 'findRelationship',   method: 'GET',   name: 'relationships.related' }
 
-    # REST parameter mapping
-    rest.parameters:
-        SORT:          sort
-        LIMIT:         limit
-        SKIP:          skip
-        FILTER:        filter
-        SPARSE_FIELDS: fields
-        INCLUDE:       include
 
 services:
 
@@ -78,4 +73,8 @@ services:
 
     conga.rest.router:
         constructor: "%conga.rest.router.constructor%"
-        arguments: ["@router"]
+        arguments: ["@router", "@conga.rest.resource.registry"]
+
+    conga.rest.normalizer:
+        constructor: "%conga.rest.normalizer.constructor%"
+        arguments: ["@conga.rest.resource.registry"]

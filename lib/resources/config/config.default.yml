@@ -3,7 +3,7 @@ rest:
     # this defines what the specification contains
     specification:
 
-        # the attribute handling: camel, snake, hyphen
+        # the attribute handling: camel, snake, hyphen, pascal, constant
         inflection: snake
 
         # the request/response content-type
@@ -15,14 +15,16 @@ rest:
         # the request validator (to validate format of request)
         validator: "@conga/framework-rest:specification/json-api/JsonApiRestRequestValidator"
 
+        marshaller: "@conga/framework-rest:specification/json-api/JsonApiMarshaller"
+
         # this defines all of the request query parsers/handlers
         query:
 
-            # the source of all query parameters ("querystring" or "body")
-            source: querystring
+            # the source of all query parameters ("query" or "body")
+            source: query
 
             # the pagination handler
-            pagination: "@conga/framework-rest:query/pagination/OffsetPagination"
+            pagination: "@conga/framework-rest:query/pagination/OffsetPaginationQueryParser"
 
             # the filtering parser
             filtering: "@conga/framework-rest:query/filtering/GenericFiltering"

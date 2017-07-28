@@ -30,12 +30,14 @@
     "recursive-readdir-sync": "1.0.6"
   },
   "devDependencies": {
-    "bass": "latest",
-    "bass-nedb": "latest",
     "@conga/framework": "latest",
     "@conga/framework-bass": "congajs/conga-bass#2.0.0-dev",
     "@conga/framework-validation": "congajs/conga-validation#2.0.0-dev",
+    "bass": "latest",
+    "bass-nedb": "latest",
+    "fs-extra": "^4.0.0",
     "jasmine": "^2.6.0",
+    "query-string": "^4.3.4",
     "request": "^2.81.0"
   },
   "readmeFilename": "README.md"

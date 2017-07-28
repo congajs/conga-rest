@@ -12,7 +12,7 @@ module.exports = class Comment {
          * @Rest:ID
          */
         this.id = null;
-        
+
         /**
          * @Bass:Field(type="Number", name="reference_id")
          * @Rest:Attribute
@@ -31,6 +31,11 @@ module.exports = class Comment {
          * @Rest:Relationship(type="one", relatedType="users")
          */
         this.user = null;
+
+        /**
+         * @Bass:Field(type="Date", name="published_at")
+         */
+        this.publishedAt = null;
 
         /**
          * @Bass:Version
