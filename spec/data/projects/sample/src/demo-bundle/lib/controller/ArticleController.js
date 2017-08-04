@@ -6,7 +6,7 @@ const Controller = require('../../../../../../../../lib/index').BassRestControll
  * @Route("/api/articles")
  *
  * @Rest:Controller(
- *     model="Article",
+ *     resource="article",
  *     isPaginationEnabled=true,
  *     defaultLimit=1000,
  *     defaultSort={referenceId: 1},
@@ -78,6 +78,10 @@ module.exports = class ArticleController extends Controller {
         // hardcoding so that new resources are in a specific account
         resource.accountId = 1;
         return Promise.resolve();
+    }
+
+    getContext() {
+        return 'ADMIN';
     }
 
 }

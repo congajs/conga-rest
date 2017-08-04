@@ -24,20 +24,39 @@ parameters:
     # rest normalizer
     conga.rest.normalizer.constructor: "@conga/framework-rest:specification/RestNormalizer"
 
+    # rest resource mapper
+    conga.rest.mapper.constructor: "@conga/framework-rest:rest/RestMapper"
+
     # default REST method mapping
     rest.methods:
 
         # normal uris
         - { path : '/',    action: 'list',    method: 'GET',    name: 'list' }
-        - { path : '/:id', action: 'find',    method: 'GET',    name: 'find.one' }
-        - { path : '/',    action: 'create',  method: 'POST',   name: 'create' }
-        - { path : '/:id', action: 'update',  method: 'PATCH',  name: 'update' }
-        - { path : '/:id', action: 'remove',  method: 'DELETE', name: 'delete' }
+        - { path : '/:id', action: 'get',     method: 'GET',    name: 'get' }
+        - { path : '/',    action: 'post',    method: 'POST',   name: 'post' }
+        - { path : '/:id', action: 'patch',   method: 'PATCH',  name: 'patch' }
+        - { path : '/:id', action: 'put',     method: 'PUT',    name: 'put' }
+        - { path : '/:id', action: 'delete',  method: 'DELETE', name: 'delete' }
 
         # resource relationships
-        - { path : '/:id/relationships/:attribute', action: 'findRelationship',   method: 'GET',   name: 'relationships.self' }
-        - { path : '/:id/relationships/:attribute', action: 'updateRelationship', method: 'PATCH', name: 'relationships.update' }
-        - { path : '/:id/:attribute',               action: 'findRelationship',   method: 'GET',   name: 'relationships.related' }
+        - {
+            path : '/:id/relationships/:attribute',
+            action: 'getRelationship',
+            method: 'GET',
+            name: 'relationships.get'
+          }
+        - {
+            path : '/:id/relationships/:attribute',
+            action: 'updateRelationship',
+            method: 'PATCH',
+            name: 'relationships.update'
+          }
+        - {
+            path : '/:id/:attribute',
+            action: 'getRelatedResource',
+            method: 'GET',
+            name: 'related'
+          }
 
 
 services:
@@ -77,4 +96,8 @@ services:
 
     conga.rest.normalizer:
         constructor: "%conga.rest.normalizer.constructor%"
+        arguments: ["@conga.rest.resource.registry", "@conga.rest.mapper", "@conga.rest.router"]
+
+    conga.rest.mapper:
+        constructor: "%conga.rest.mapper.constructor%"
         arguments: ["@conga.rest.resource.registry"]

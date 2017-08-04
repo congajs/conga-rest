@@ -28,7 +28,7 @@ module.exports = class Comment {
 
         /**
          * @Bass:OneToOne(document="User", name="user_id")
-         * @Rest:Relationship(type="one", relatedType="users")
+         * @Rest:Relationship(type="one", relatedType="user")
          */
         this.user = null;
 

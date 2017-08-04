@@ -7,7 +7,7 @@ const FilterSet = require('../../../lib/query/FilterSet');
 
 const GenericFiltering = require('../../../lib/query/filtering/GenericFiltering');
 const Serializer = require('../../../lib/specification/Serializer');
-
+const RestMapper = require('../../../lib/rest/RestMapper');
 const RestResourceRegistry = require('../../../lib/rest/RestResourceRegistry');
 
 describe("GenericFiltering", () => {
@@ -18,6 +18,7 @@ describe("GenericFiltering", () => {
     beforeAll(() => {
 
         const registry = new RestResourceRegistry();
+        const mapper = new RestMapper(registry);
 
         registry.add('user', {
             attributesToProperties: {
@@ -33,10 +34,7 @@ describe("GenericFiltering", () => {
 
         parser = new GenericFiltering(
             'query',
-            new Serializer(
-                registry,
-                'snake'
-            )
+            mapper
         );
 
         const query = {

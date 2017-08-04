@@ -3,7 +3,7 @@ const Controller = require('../../../../../../../../lib/index').BassRestControll
 /**
  * @Route("/api/comments")
  * @Rest:Controller(
- *     model="Comment",
+ *     resource="comment",
  *     isPaginationEnabled=true,
  *     defaultLimit=1000,
  *     isIncludeRelatedSupported=true

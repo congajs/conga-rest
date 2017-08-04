@@ -3,7 +3,7 @@ const Controller = require('../../../../../../../../lib/index').BassRestControll
 /**
  * @Route("/api/users")
  * @Rest:Controller(
- *     model="User",
+ *     resource="user",
  *     isPaginationEnabled=true,
  *     defaultLimit=1000,
  *     isIncludeRelatedSupported=true

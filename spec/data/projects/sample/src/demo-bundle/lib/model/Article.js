@@ -39,7 +39,7 @@ module.exports = class Article {
 
         /**
          * @Bass:OneToMany(document="Comment")
-         * @Rest:Relationship(type="many", relatedType="comments")
+         * @Rest:Relationship(type="many", relatedType="comment")
          */
         this.comments = [];
 
@@ -54,6 +54,13 @@ module.exports = class Article {
          * @Rest:Attribute(expose=false)
          */
         this.notExposed = null;
+
+        /**
+         * @Bass:Field(type="String", name="internal_comment")
+         * @Rest:Attribute
+         * @Rest:Group(read=['ADMIN'], write=['ADMIN'])
+         */
+        this.internalComment = null;
 
         /**
          * @Bass:Field(type="Date", name="published_at")

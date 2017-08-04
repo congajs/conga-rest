@@ -54,7 +54,7 @@ module.exports = class User {
         /**
          * @Bass:CreatedAt
          * @Bass:Field(type="Date", name="created_at")
-         * @Rest:Attribute(update=false)
+         * @Rest:Attribute(type="Date", format="YYYY-MM-DD", update=false)
          */
         this.createdAt = null;
 
