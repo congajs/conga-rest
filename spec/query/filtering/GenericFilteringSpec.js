@@ -1,3 +1,4 @@
+const path = require('path');
 const qs = require('query-string');
 const jasmine = require('jasmine');
 
@@ -9,7 +10,7 @@ const GenericFiltering = require('../../../lib/query/filtering/GenericFiltering'
 const Serializer = require('../../../lib/specification/Serializer');
 const RestMapper = require('../../../lib/rest/RestMapper');
 const RestResourceRegistry = require('../../../lib/rest/RestResourceRegistry');
-
+const ResourceAnnotationCompiler = require('../../../lib/annotation/ResourceAnnotationCompiler');
 describe("GenericFiltering", () => {
 
     let filters;
@@ -18,19 +19,19 @@ describe("GenericFiltering", () => {
     beforeAll(() => {
 
         const registry = new RestResourceRegistry();
-        const mapper = new RestMapper(registry);
+        const compiler = new ResourceAnnotationCompiler();
 
-        registry.add('user', {
-            attributesToProperties: {
-                sex: { target: 'sex' },
-                age: { target: 'age' },
-                state: { target: 'state' },
-                name: { target: 'name' },
-                hobbies: { target: 'hobbies' },
-                created_at: { target: 'createdAt' },
-                is_cool: { target: 'isCool' }
-            }
-        });
+        const paths = [
+            path.join(__dirname, '..', '..', 'data', 'projects', 'sample', 'src', 'demo-bundle', 'lib', 'model', 'Profile.js'),
+        ];
+
+        compiler.compile(
+            registry,
+            paths,
+            'snake'
+        );
+
+        mapper = new RestMapper(registry);
 
         parser = new GenericFiltering(
             'query',
@@ -38,7 +39,7 @@ describe("GenericFiltering", () => {
         );
 
         const query = {
-            sex: 'M',
+            gender: 'F',
             age: 'gte:18+AND+lt:40',
             state: 'in:CA,OR,NV',
             name: 'like:M*',
@@ -55,11 +56,10 @@ describe("GenericFiltering", () => {
             }
         };
 
-        filters = parser.parse(req, 'user');
+        filters = parser.parse(req, 'profile');
 
-        console.log(filters);
-
-        console.log(filters.get('age').filters);
+        // console.log(filters);
+        // console.log(filters.get('age').filters);
     });
 
     it('should have created a FilterSet', () => {
@@ -67,9 +67,9 @@ describe("GenericFiltering", () => {
     });
 
     it('should have created an equals filter', () => {
-        expect(filters.get('sex') instanceof Filter).toBeTruthy();
-        expect(filters.get('sex').comparison).toEqual(Filter.EQUALS);
-        expect(filters.get('sex').value).toEqual('M');
+        expect(filters.get('gender') instanceof Filter).toBeTruthy();
+        expect(filters.get('gender').comparison).toEqual(Filter.EQUALS);
+        expect(filters.get('gender').value).toEqual('F');
     });
 
     it('should have created a like filter', () => {

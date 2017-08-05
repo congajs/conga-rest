@@ -50,6 +50,10 @@ describe("Kernel", () => {
 
     }, 1000000000);
 
+    afterAll(() => {
+        kernel.container.get('express.server').close();
+    });
+
     // =============================================================================================
     // LIST
     // =============================================================================================
@@ -66,6 +70,7 @@ describe("Kernel", () => {
 
         }, (error, response, body) => {
 
+            console.log(body);
             //console.log(body.data[0].attributes);
 
             expect(response.statusCode).toEqual(200);

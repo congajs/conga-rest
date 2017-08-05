@@ -8,7 +8,7 @@ describe("ResourceAnnotationHandler", () => {
     let handler;
     let Article;
 
-    beforeEach(() => {
+    beforeAll(() => {
 
         const resolver = new Resolver();
         resolver.register('demo-bundle', path.join(__dirname, '..', 'data', 'projects', 'sample', 'src', 'demo-bundle'));
@@ -35,7 +35,7 @@ describe("ResourceAnnotationHandler", () => {
     });
 
     it("should have metadata for id", () => {
-        expect(Article.prototype.__CONGA_REST__.id).toEqual({ targetType: 'property', target: 'id' });
+        expect(Article.prototype.__CONGA_REST__.id).toEqual({ targetType: 'property', target: 'id', attribute: 'id' });
     });
 
     it("should have class reference", () => {
@@ -48,12 +48,12 @@ describe("ResourceAnnotationHandler", () => {
 
     it("should have properties", () => {
         expect(Article.prototype.__CONGA_REST__.properties).not.toBeUndefined();
-        expect(Article.prototype.__CONGA_REST__.properties.length).toEqual(8);
+        expect(Article.prototype.__CONGA_REST__.properties.length).toEqual(9);
     });
 
     it("should have attribute to property mapping", () => {
         expect(Article.prototype.__CONGA_REST__.attributesToProperties).not.toBeUndefined();
-        expect(Object.keys(Article.prototype.__CONGA_REST__.attributesToProperties).length).toEqual(10);
+        expect(Object.keys(Article.prototype.__CONGA_REST__.attributesToProperties).length).toEqual(11);
     });
 
     it("should have mapped snake case attributes", () => {
@@ -87,6 +87,6 @@ describe("ResourceAnnotationHandler", () => {
     });
 
     it("should have an attribute-to-property mapping for one-to-many attribute", () => {
-        expect(Article.prototype.__CONGA_REST__.attributesToProperties.comments.relatedType).toEqual('comments');
+        expect(Article.prototype.__CONGA_REST__.attributesToProperties.comments.relatedType).toEqual('comment');
     });
 });

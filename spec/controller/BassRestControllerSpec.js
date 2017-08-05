@@ -32,7 +32,7 @@ describe("Kernel", () => {
 
         kernel.addBundlePaths({
             '@conga/framework-bass': path.join(__dirname, '..', '..', 'node_modules', '@conga', 'framework-bass'),
-            '@conga/framework-validation': path.join(__dirname, '..', '..', 'node_modules', '@conga', 'framework-validation'), // CHANGE THIS!!!
+            '@conga/framework-validation': path.join(__dirname, '..', '..', 'node_modules', '@conga', 'framework-validation'),
             '@conga/framework-rest': path.join(__dirname, '..', '..'),
             'demo-bundle': path.join(__dirname, '..', '..', 'spec', 'data', 'projects', 'sample', 'src', 'demo-bundle'),
         });
@@ -57,6 +57,10 @@ describe("Kernel", () => {
 
     }, 1000000000);
 
+    afterAll(() => {
+        kernel.container.get('express.server').close();
+    });
+
     // LIST
     // =============================================================================================
     it("should load a list of resources", (done) => {
@@ -69,11 +73,7 @@ describe("Kernel", () => {
                 },
                 sort: 'reference_id'
             },
-            conga: {
-                route: {
-
-                }
-            }
+            conga: { route: {} }
         };
 
         const res = {
@@ -105,11 +105,7 @@ describe("Kernel", () => {
                 id: id
             },
 
-            conga: {
-                route: {
-
-                }
-            }
+            conga: { route: {} }
         };
 
         const res = {
@@ -141,11 +137,7 @@ describe("Kernel", () => {
                 id: 'this-is-an-invalid-id'
             },
 
-            conga: {
-                route: {
-
-                }
-            }
+            conga: { route: {} }
         };
 
         const res = {
@@ -178,11 +170,7 @@ describe("Kernel", () => {
                 id: id
             },
 
-            conga: {
-                route: {
-
-                }
-            }
+            conga: { route: {} }
         };
 
         const res = {
@@ -219,11 +207,7 @@ describe("Kernel", () => {
                 id: id
             },
 
-            conga: {
-                route: {
-
-                }
-            }
+            conga: { route: {} }
         };
 
         const res = {
@@ -266,11 +250,7 @@ describe("Kernel", () => {
                 }
             },
 
-            conga: {
-                route: {
-
-                }
-            }
+            conga: { route: {} }
         };
 
         const res = {
@@ -285,6 +265,51 @@ describe("Kernel", () => {
                 expect(data.type).toEqual('article');
                 expect(data.data.id).not.toEqual(null);
                 done();
+            }
+        };
+
+        controller.post(req, res);
+
+    });
+
+    // POST WITH INVALID BODY
+    // =============================================================================================
+    it("should return errors for invalid post data", (done) => {
+
+        const req = {
+
+            body: {
+                data: {
+                    type: "article",
+                    attributes: {
+                        title: "ABC",
+                        body: "",
+                        internal_comment: "comment from ADMIN only"
+                    },
+                    relationships: {
+                        author: {
+                            data: { type: "user", id: userId }
+                        }
+                    }
+                }
+            },
+
+            conga: { route: {} }
+        };
+
+        const res = {
+
+            error: (err) => {
+                expect(err.status).toEqual(422);
+                expect(err.data.resource).toEqual('article');
+                expect(err.data.errors.length).toEqual(2);
+                expect(err.data.errors[0].property).toEqual('title');
+                expect(err.data.errors[1].property).toEqual('body');
+                done();
+            },
+
+            return: (data, status) => {
+
             }
         };
 
@@ -319,11 +344,7 @@ describe("Kernel", () => {
                 }
             },
 
-            conga: {
-                route: {
-
-                }
-            }
+            conga: { route: {} }
         };
 
         const res = {
@@ -346,6 +367,57 @@ describe("Kernel", () => {
         controller.patch(req, res);
 
     });
+
+    // PATCH WITH INVALID BODY
+    // =============================================================================================
+    it("should return a 422 response when patching with invalid data", (done) => {
+
+        const req = {
+
+            params: {
+                id: id
+            },
+
+            body: {
+                data: {
+                    id: id,
+                    type: "article",
+                    attributes: {
+                        title: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        body: ""
+                    },
+                    relationships: {
+                        author: {
+                            data: { type: "user", id: userId }
+                        }
+                    }
+                }
+            },
+
+            conga: { route: {} }
+        };
+
+        const res = {
+
+            error: (err) => {
+                expect(err.status).toEqual(422);
+                expect(err.data.resource).toEqual('article');
+                expect(err.data.errors.length).toEqual(2);
+                expect(err.data.errors[0].property).toEqual('title');
+                expect(err.data.errors[1].property).toEqual('body');
+                done();
+            },
+
+            return: (data, status) => {
+
+            }
+        };
+
+        controller.patch(req, res);
+
+    });
+
+
 
     // DELETE
     // =============================================================================================
@@ -374,11 +446,7 @@ describe("Kernel", () => {
                 }
             },
 
-            conga: {
-                route: {
-
-                }
-            }
+            conga: { route: {} }
         };
 
         const res = {

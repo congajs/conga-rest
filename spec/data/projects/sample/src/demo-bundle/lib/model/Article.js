@@ -28,12 +28,14 @@ module.exports = class Article {
         /**
          * @Bass:Field(type="String", name="title")
          * @Rest:Attribute
+         * @Assert:Length(min=4, max=100)
          */
         this.title = null;
 
         /**
          * @Bass:Field(type="String", name="body")
          * @Rest:Attribute
+         * @Assert:NotBlank
          */
         this.body = null;
 

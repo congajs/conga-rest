@@ -41,49 +41,49 @@ describe("JsonApiMarshaller", () => {
         const router = new Router();
         router.setRoutes([
             {
-                name: 'conga.rest.Article.list',
+                name: 'conga.rest.article.list',
                 controller: 'controller.demo-bundle.ArticleController',
                 action: 'list',
                 method: 'GET',
                 path: '/api/articles'
             },
             {
-                name: 'conga.rest.Article.find.one',
+                name: 'conga.rest.article.get',
                 controller: 'controller.demo-bundle.ArticleController',
                 action: 'find',
                 method: 'GET',
                 path: '/api/articles/:id'
             },
             {
-                name: 'conga.rest.Article.create',
+                name: 'conga.rest.article.post',
                 controller: 'controller.demo-bundle.ArticleController',
                 action: 'create',
                 method: 'POST',
                 path: '/api/articles'
             },
             {
-                name: 'conga.rest.Article.update',
+                name: 'conga.rest.article.patch',
                 controller: 'controller.demo-bundle.ArticleController',
                 action: 'update',
                 method: 'PATCH',
                 path: '/api/articles/:id'
             },
             {
-                name: 'conga.rest.Article.delete',
+                name: 'conga.rest.article.delete',
                 controller: 'controller.demo-bundle.ArticleController',
                 action: 'remove',
                 method: 'DELETE',
                 path: '/api/articles/:id'
             },
             {
-                name: 'conga.rest.Article.relationships.get',
+                name: 'conga.rest.article.relationships.get',
                 controller: 'controller.demo-bundle.ArticleController',
                 action: 'findRelationship',
                 method: 'GET',
                 path: '/api/articles/:id/:attribute'
             },
             {
-                name: 'conga.rest.Article.related',
+                name: 'conga.rest.article.related',
                 controller: 'controller.demo-bundle.ArticleController',
                 action: 'getRelatedResource',
                 method: 'GET',
@@ -92,21 +92,21 @@ describe("JsonApiMarshaller", () => {
 
             // Comment
             {
-                name: 'conga.rest.Comment.find.one',
+                name: 'conga.rest.comment.get',
                 controller: 'controller.demo-bundle.ArticleController',
                 action: 'find',
                 method: 'GET',
                 path: '/api/comments/:id'
             },
             {
-                name: 'conga.rest.Comment.relationships.get',
+                name: 'conga.rest.comment.relationships.get',
                 controller: 'controller.demo-bundle.CommentController',
                 action: 'findRelationship',
                 method: 'GET',
                 path: '/api/comments/:id/relationships/:attribute'
             },
             {
-                name: 'conga.rest.Comment.related',
+                name: 'conga.rest.comment.related',
                 controller: 'controller.demo-bundle.CommentController',
                 action: 'getRelatedResource',
                 method: 'GET',
@@ -115,14 +115,14 @@ describe("JsonApiMarshaller", () => {
 
             // User
             {
-                name: 'conga.rest.User.find.one',
+                name: 'conga.rest.user.get',
                 controller: 'controller.demo-bundle.UserController',
                 action: 'find',
                 method: 'GET',
                 path: '/api/users/:id'
             },
             {
-                name: 'conga.rest.User.related',
+                name: 'conga.rest.user.related',
                 controller: 'controller.demo-bundle.UserController',
                 action: 'getRelatedResource',
                 method: 'GET',
@@ -131,26 +131,26 @@ describe("JsonApiMarshaller", () => {
         ]);
 
         Article.prototype.__CONGA_REST__.routes = {
-            'find.one': 'conga.rest.Article.find.one',
-            'relationships.get': 'conga.rest.Article.relationships.get',
-            'related': 'conga.rest.Article.related'
+            'get': 'conga.rest.article.get',
+            'relationships.get': 'conga.rest.article.relationships.get',
+            'related': 'conga.rest.article.related'
         };
 
         Comment.prototype.__CONGA_REST__.routes = {
-            'find.one': 'conga.rest.Comment.find.one',
-            'relationships.get': 'conga.rest.Comment.relationships.get',
-            'related': 'conga.rest.Comment.related'
+            'get': 'conga.rest.comment.get',
+            'relationships.get': 'conga.rest.comment.relationships.get',
+            'related': 'conga.rest.comment.related'
         };
 
         User.prototype.__CONGA_REST__.routes = {
-            'find.one': 'conga.rest.User.find.one',
-            'relationships.get': 'conga.rest.User.relationships.get',
-            'related': 'conga.rest.User.related'
+            'get': 'conga.rest.user.get',
+            'relationships.get': 'conga.rest.user.relationships.get',
+            'related': 'conga.rest.user.related'
         };
 
         const mapper = new RestMapper(registry, router);
 
-        normalizer = new RestNormalizer(mapper, new RestRouter(router, registry));
+        normalizer = new RestNormalizer(registry, mapper, new RestRouter(router, registry));
 
         req = {
             protocol: 'http',
@@ -227,7 +227,7 @@ describe("JsonApiMarshaller", () => {
 
         const article = new Article();
 
-        marshaller.unmarshal(req, article);
+        marshaller.unmarshal(req, 'article');
 
         console.log(article);
 
