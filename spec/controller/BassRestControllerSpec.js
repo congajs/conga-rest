@@ -177,8 +177,8 @@ describe("Kernel", () => {
 
             error: (err) => {
                 expect(err.status).toEqual(400);
-                expect(err.data.source).toEqual({ parameter: 'include' });
-                expect(err.data.value).toEqual('this.is.not.valid');
+                expect(err.data.errors[0].source).toEqual({ parameter: 'include' });
+                expect(err.data.errors[0].value).toEqual('this.is.not.valid');
                 done();
             },
 
@@ -214,8 +214,8 @@ describe("Kernel", () => {
 
             error: (err) => {
                 expect(err.status).toEqual(400);
-                expect(err.data.source).toEqual({ parameter: 'fields' });
-                expect(err.data.value).toEqual('article:not-valid');
+                expect(err.data.errors[0].source).toEqual({ parameter: 'fields' });
+                expect(err.data.errors[0].value).toEqual('not-valid');
                 done();
             },
 
@@ -303,8 +303,8 @@ describe("Kernel", () => {
                 expect(err.status).toEqual(422);
                 expect(err.data.resource).toEqual('article');
                 expect(err.data.errors.length).toEqual(2);
-                expect(err.data.errors[0].property).toEqual('title');
-                expect(err.data.errors[1].property).toEqual('body');
+                expect(err.data.errors[0].source.pointer).toEqual('title');
+                expect(err.data.errors[1].source.pointer).toEqual('body');
                 done();
             },
 
@@ -403,8 +403,8 @@ describe("Kernel", () => {
                 expect(err.status).toEqual(422);
                 expect(err.data.resource).toEqual('article');
                 expect(err.data.errors.length).toEqual(2);
-                expect(err.data.errors[0].property).toEqual('title');
-                expect(err.data.errors[1].property).toEqual('body');
+                expect(err.data.errors[0].source.pointer).toEqual('title');
+                expect(err.data.errors[1].source.pointer).toEqual('body');
                 done();
             },
 

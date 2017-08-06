@@ -3,14 +3,14 @@ rest:
     # this defines what the specification contains
     specification:
 
-        # the attribute handling: camel, snake, hyphen, pascal, constant
+        # the request/response content-type
+        content-type: "application/vnd.api+json"
+
+        # the attribute inflection: camel, snake, hyphen, pascal, constant
         inflection: snake
 
         # the default format to use for serializing dates
         date-format: "YYYY-MM-DD HH:mm:ss"
-
-        # the request/response content-type
-        content-type: "application/vnd.api+json"
 
         # the request/response format serializer
         serializer: "@conga/framework-rest:specification/json-api/JsonApiSerializer"
@@ -45,8 +45,11 @@ rest:
         # this defines all of the error handling
         error:
 
+            # the error handler
+            handler: "@conga/framework-rest:error/GenericErrorHandler"
+
             # the error response formatter
-            formatter: "@conga/framework-rest:error/GenericErrorFormatter"
+            formatter: "@conga/framework-rest:specification/json-api/JsonApiErrorFormatter"
 
     # the namespaced paths to the resource class directories
     resource:

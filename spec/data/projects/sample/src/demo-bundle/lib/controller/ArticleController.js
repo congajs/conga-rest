@@ -58,7 +58,7 @@ module.exports = class ArticleController extends Controller {
      * @param  {Object}   conditions
      * @return {Promise}
      */
-    modifyFindConditions(req, res, conditions) {
+    modifyGetConditions(req, res, conditions) {
 
         // hardcoding so that only articles with accountId = 1 are allowed to be retrieved
         conditions.accountId = 1;
@@ -80,7 +80,7 @@ module.exports = class ArticleController extends Controller {
         return Promise.resolve();
     }
 
-    getContext() {
+    getGroupContext() {
         return 'ADMIN';
     }
 
