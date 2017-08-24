@@ -45,6 +45,23 @@ module.exports = class User {
         this.gender = null;
 
         /**
+         * @Bass:OneToOne(document="User", name="profile_id")
+         * @Rest:EmbeddedRelationship(type="one", relatedType="user_profile")
+         */
+        this.profile = null;
+
+        /**
+         * @Bass:Field(type="Number", name="status")
+         * @Rest:Attribute
+         * @Rest:MapAttribute({
+         *     "0": "INACTIVE",
+         *     "1": "ACTIVE",
+         *     "-1": "ARCHIVED"
+         * })
+         */
+        this.status = 0;
+
+        /**
          * @Bass:Version
          * @Bass:Field(type="Number", name="version")
          * @Rest:Attribute(update=false)

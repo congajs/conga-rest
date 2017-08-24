@@ -13,6 +13,7 @@ describe("Kernel", () => {
     let kernel;
     let controller;
     let id;
+    let newId;
     let userId;
 
     beforeAll((done) => {
@@ -39,19 +40,14 @@ describe("Kernel", () => {
 
         kernel.boot(() => {
 
-            // need to wait a bit to make sure nedb connections are created
-            setTimeout(() => {
-
-                kernel.container.get('bass.fixture.runner').runFixtures(
-                    path.join(__dirname, '..', 'data', 'projects', 'sample', 'app', 'bass', 'fixtures'),
-                    null,
-                    () => {
-                        controller = kernel.container.get('controller.demo-bundle.ArticleController');
-                        done();
-                    }
-                )
-
-            }, 500);
+            kernel.container.get('bass.fixture.runner').runFixtures(
+                path.join(__dirname, '..', 'data', 'projects', 'sample', 'app', 'bass', 'fixtures'),
+                null,
+                () => {
+                    controller = kernel.container.get('controller.demo-bundle.ArticleController');
+                    done();
+                }
+            )
 
         });
 
@@ -264,6 +260,9 @@ describe("Kernel", () => {
                 expect(data.context).toEqual('ADMIN');
                 expect(data.type).toEqual('article');
                 expect(data.data.id).not.toEqual(null);
+
+                newId = data.data.id;
+                console.log('====== CREATED')
                 done();
             }
         };
@@ -324,12 +323,12 @@ describe("Kernel", () => {
         const req = {
 
             params: {
-                id: id
+                id: newId
             },
 
             body: {
                 data: {
-                    id: id,
+                    id: newId,
                     type: "article",
                     attributes: {
                         title: "TITLE UPDATED FROM API",
@@ -357,7 +356,7 @@ describe("Kernel", () => {
                 expect(status).toEqual(201);
                 expect(data.context).toEqual('ADMIN');
                 expect(data.type).toEqual('article');
-                expect(data.data.id).toEqual(id);
+                expect(data.data.id).toEqual(newId);
                 expect(data.data.title).toEqual('TITLE UPDATED FROM API');
                 expect(data.data.version).toEqual(2);
                 done();
@@ -375,12 +374,12 @@ describe("Kernel", () => {
         const req = {
 
             params: {
-                id: id
+                id: newId
             },
 
             body: {
                 data: {
-                    id: id,
+                    id: newId,
                     type: "article",
                     attributes: {
                         title: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -426,24 +425,7 @@ describe("Kernel", () => {
         const req = {
 
             params: {
-                id: id
-            },
-
-            body: {
-                data: {
-                    id: id,
-                    type: "article",
-                    attributes: {
-                        title: "TITLE UPDATED FROM API",
-                        body: "BODY UPDATED FROM API",
-                        internal_comment: "INTERNAL COMMENT UPDATED FROM API"
-                    },
-                    relationships: {
-                        author: {
-                            data: { type: "user", id: userId }
-                        }
-                    }
-                }
+                id: newId
             },
 
             conga: { route: {} }

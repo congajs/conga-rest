@@ -23,7 +23,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@conga/annotations": "1.0.0",
+    "@conga/annotations": "^1.0.0",
     "@conga/framework": "^2.0.0",
     "change-case": "3.0.1",
     "lodash": "4.17.4",
