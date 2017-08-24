@@ -202,8 +202,8 @@ describe("JsonApiMarshaller", () => {
 
         const normalized = normalizer.normalize(req, data);
 
-        console.log(JSON.stringify(normalized, null, 4));
-        console.log('========================================================');
+        // console.log(JSON.stringify(normalized, null, 4));
+        // console.log('========================================================');
 
         const marshalled = marshaller.marshal(req, normalized, data);
 

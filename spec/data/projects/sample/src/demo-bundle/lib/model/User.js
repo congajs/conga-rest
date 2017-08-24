@@ -56,7 +56,7 @@ module.exports = class User {
          * @Rest:MapAttribute({
          *     "0": "INACTIVE",
          *     "1": "ACTIVE",
-         *     "-1": "ARCHIVED"
+         *     "99": "ARCHIVED"
          * })
          */
         this.status = 0;
