@@ -230,6 +230,8 @@ describe("Kernel", () => {
 
         const req = {
 
+            method: 'POST',
+
             body: {
                 data: {
                     type: "article",
@@ -262,7 +264,6 @@ describe("Kernel", () => {
                 expect(data.data.id).not.toEqual(null);
 
                 newId = data.data.id;
-                console.log('====== CREATED')
                 done();
             }
         };

@@ -13,7 +13,7 @@ rest:
         date-format: "YYYY-MM-DD HH:mm:ss"
 
         # the request/response format serializer
-        serializer: "@conga/framework-rest:specification/json-api/JsonApiSerializer"
+        serializer: "@conga/framework-rest:specification/Serializer"
 
         # the request validator (to validate format of request)
         validator: "@conga/framework-rest:specification/json-api/JsonApiRestRequestValidator"

@@ -38,7 +38,7 @@ rest:
 
     attribute.inflection: snake
 
-    model:
+    resource:
         paths:
             - demo-bundle:model
 
@@ -47,4 +47,3 @@ validation:
     paths:
 
         - demo-bundle:model
-        

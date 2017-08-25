@@ -17,7 +17,7 @@ describe("ResourceAnnotationHandler", () => {
 
         const config = {
             'attribute.inflection': 'snake',
-            'model': {
+            'resource': {
                 'paths': [
                     'demo-bundle:model'
                 ]
