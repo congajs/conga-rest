@@ -32,7 +32,7 @@
     "recursive-readdir-sync": "1.0.6"
   },
   "devDependencies": {
-    "@conga/framework-bass": "congajs/conga-bass#2.0.0-dev",
+    "@conga/framework-bass": "congajs/conga-bass",
     "@conga/framework-validation": "congajs/conga-validation#2.0.0-dev",
     "bass": "latest",
     "bass-nedb": "latest",
