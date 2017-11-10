@@ -40,7 +40,7 @@ rest:
             sparse: "@conga/framework-rest:query/sparse/GenericSparse"
 
             # the include parser
-            include: "@conga/framework-rest:query/include/GenericIncludeQueryParser"
+            includes: "@conga/framework-rest:query/include/GenericIncludeQueryParser"
 
         # this defines all of the error handling
         error:
