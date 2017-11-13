@@ -6,7 +6,7 @@ This is a bundle for the [conga.js](https://github.com/congajs/conga) framework 
 
 The goal of this bundle is to make it as simple as possible to create RESTful APIs while mitigating the need to worry about serialization, parsing query parameters, handling resource relationships, etc.
 
-It aims to provide a solid foundation to handle as many common use cases as possible with minimal configuration while still giving you complete control to customize any part.
+It aims to provide a solid foundation to handle as many common use cases as possible with minimal configuration while still giving you complete control to customize any part of your API.
 
 Combined with conga-bass it is trivial to quickly spin up a REST API for a configured database.
 
