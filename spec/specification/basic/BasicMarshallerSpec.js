@@ -189,9 +189,12 @@ describe("BasicMarshaller", () => {
     });
 
 
-    fit("should marshal a single response", () => {
+    it("should marshal a single response", () => {
 
         const data = {
+            route: {
+                action: 'list'
+            },
             data: article,
             includes: [
                 'author',

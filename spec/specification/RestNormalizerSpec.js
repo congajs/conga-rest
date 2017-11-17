@@ -204,6 +204,9 @@ describe("RestNormalizer", () => {
     it("should normalize a single response with sparse fields", () => {
 
         const normalized = normalizer.normalize(req, {
+            route: {
+                action: 'get'
+            },
             data: article,
             sparse: {
                 article: ['title', 'created_at'],

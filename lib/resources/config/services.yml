@@ -38,6 +38,11 @@ parameters:
         - { path : '/:id', action: 'put',     method: 'PUT',    name: 'put' }
         - { path : '/:id', action: 'delete',  method: 'DELETE', name: 'delete' }
 
+        # bulk operations
+        - { path : '/',    action: 'bulkPost', method: 'POST',  name: 'bulk.post' }
+        - { path : '/',    action: 'bulkPatch', method: 'PATCH',  name: 'bulk.patch' }
+        - { path : '/',    action: 'bulkDelete', method: 'DELETE',  name: 'bulk.delete' }
+
         # resource relationships
         - {
             path : '/:id/relationships/:attribute',

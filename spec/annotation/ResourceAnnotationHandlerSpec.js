@@ -16,9 +16,11 @@ describe("ResourceAnnotationHandler", () => {
         handler = new ResourceAnnotationHandler(resolver, new RestResourceRegistry());
 
         const config = {
-            'attribute.inflection': 'snake',
-            'resource': {
-                'paths': [
+            specification: {
+                inflection: 'snake'
+            },
+            resource: {
+                paths: [
                     'demo-bundle:model'
                 ]
             }

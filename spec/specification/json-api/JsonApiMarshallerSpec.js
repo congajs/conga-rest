@@ -192,6 +192,9 @@ describe("JsonApiMarshaller", () => {
     it("should marshal a single response", () => {
 
         const data = {
+            route: {
+                action: 'get'
+            },
             data: article,
             includes: [
                 'author',

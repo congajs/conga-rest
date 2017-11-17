@@ -12,6 +12,9 @@ rest:
         # the default format to use for serializing dates
         date-format: "YYYY-MM-DD HH:mm:ss"
 
+        # use absolute urls in links
+        absolute-urls: true
+
         # the request/response format serializer
         serializer: "@conga/framework-rest:specification/Serializer"
 
