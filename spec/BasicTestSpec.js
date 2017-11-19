@@ -5,7 +5,7 @@ const request = require('request');
 const Kernel = require('@conga/framework/lib/kernel/TestKernel');
 const jasmine = require('jasmine');
 
-describe("BASIC REST", () => {
+xdescribe("BASIC REST", () => {
 
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000000;
 
@@ -53,7 +53,7 @@ describe("BASIC REST", () => {
     // =============================================================================================
     // LIST
     // =============================================================================================
-    fit("should load a list of resources", (done) => {
+    it("should load a list of resources", (done) => {
 
         request({
 
