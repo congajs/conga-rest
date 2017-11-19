@@ -74,7 +74,7 @@ describe("RestNormalizer", () => {
                 path: '/api/articles/:id'
             },
             {
-                name: 'conga.rest.article.relationships.get',
+                name: 'conga.rest.article.get.relationship',
                 controller: 'controller.demo-bundle.ArticleController',
                 action: 'findRelationship',
                 method: 'GET',
@@ -97,9 +97,9 @@ describe("RestNormalizer", () => {
                 path: '/api/comments/:id'
             },
             {
-                name: 'conga.rest.comment.relationships.get',
+                name: 'conga.rest.comment.get.relationship',
                 controller: 'controller.demo-bundle.CommentController',
-                action: 'findRelationship',
+                action: 'getRelationship',
                 method: 'GET',
                 path: '/api/comments/:id/relationships/:attribute'
             },
@@ -130,19 +130,19 @@ describe("RestNormalizer", () => {
 
         Article.prototype.__CONGA_REST__.routes = {
             'get': 'conga.rest.article.get',
-            'relationships.get': 'conga.rest.article.relationships.get',
+            'get.relationship': 'conga.rest.article.get.relationship',
             'related': 'conga.rest.article.related'
         };
 
         Comment.prototype.__CONGA_REST__.routes = {
             'get': 'conga.rest.comment.get',
-            'relationships.get': 'conga.rest.comment.relationships.get',
+            'get.relationship': 'conga.rest.comment.get.relationship',
             'related': 'conga.rest.comment.related'
         };
 
         User.prototype.__CONGA_REST__.routes = {
             'get': 'conga.rest.user.get',
-            'relationships.get': 'conga.rest.user.relationships.get',
+            'get.relationship': 'conga.rest.user.get.relationship',
             'related': 'conga.rest.user.related'
         };
 
@@ -205,7 +205,8 @@ describe("RestNormalizer", () => {
 
         const normalized = normalizer.normalize(req, {
             route: {
-                action: 'get'
+                action: 'get',
+                name: 'get'
             },
             data: article,
             sparse: {

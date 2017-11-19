@@ -22,7 +22,7 @@ bass:
 
         default:
             adapter:  bass-nedb
-            directory: "%kernel.var_path%/data/nedb"
+            directory: "%kernel.var_path%/data/nedb-basic"
 
     # the managers
     managers:
@@ -39,6 +39,12 @@ rest:
     specification:
 
         inflection: snake
+
+        # the request validator (to validate format of request)
+        validator: "@conga/framework-rest:specification/basic/BasicRestRequestValidator"
+
+        # the marshaller which actually serializes data to the final output
+        marshaller: "@conga/framework-rest:specification/basic/BasicMarshaller"
 
     resource:
         paths:

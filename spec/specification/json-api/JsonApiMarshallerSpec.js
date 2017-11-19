@@ -76,9 +76,9 @@ describe("JsonApiMarshaller", () => {
                 path: '/api/articles/:id'
             },
             {
-                name: 'conga.rest.article.relationships.get',
+                name: 'conga.rest.article.get.relationship',
                 controller: 'controller.demo-bundle.ArticleController',
-                action: 'findRelationship',
+                action: 'getRelationship',
                 method: 'GET',
                 path: '/api/articles/:id/:attribute'
             },
@@ -99,9 +99,9 @@ describe("JsonApiMarshaller", () => {
                 path: '/api/comments/:id'
             },
             {
-                name: 'conga.rest.comment.relationships.get',
+                name: 'conga.rest.comment.get.relationship',
                 controller: 'controller.demo-bundle.CommentController',
-                action: 'findRelationship',
+                action: 'getRelationship',
                 method: 'GET',
                 path: '/api/comments/:id/relationships/:attribute'
             },
@@ -132,19 +132,19 @@ describe("JsonApiMarshaller", () => {
 
         Article.prototype.__CONGA_REST__.routes = {
             'get': 'conga.rest.article.get',
-            'relationships.get': 'conga.rest.article.relationships.get',
+            'get.relationship': 'conga.rest.article.get.relationship',
             'related': 'conga.rest.article.related'
         };
 
         Comment.prototype.__CONGA_REST__.routes = {
             'get': 'conga.rest.comment.get',
-            'relationships.get': 'conga.rest.comment.relationships.get',
+            'get.relationship': 'conga.rest.comment.get.relationship',
             'related': 'conga.rest.comment.related'
         };
 
         User.prototype.__CONGA_REST__.routes = {
             'get': 'conga.rest.user.get',
-            'relationships.get': 'conga.rest.user.relationships.get',
+            'get.relationship': 'conga.rest.user.get.relationship',
             'related': 'conga.rest.user.related'
         };
 
@@ -193,7 +193,8 @@ describe("JsonApiMarshaller", () => {
 
         const data = {
             route: {
-                action: 'get'
+                action: 'get',
+                name: 'get'
             },
             data: article,
             includes: [
@@ -205,8 +206,8 @@ describe("JsonApiMarshaller", () => {
 
         const normalized = normalizer.normalize(req, data);
 
-        // console.log(JSON.stringify(normalized, null, 4));
-        // console.log('========================================================');
+        console.log(JSON.stringify(normalized, null, 4));
+        console.log('========================================================');
 
         const marshalled = marshaller.marshal(req, normalized, data);
 
@@ -224,6 +225,12 @@ describe("JsonApiMarshaller", () => {
                 data: {
                     "title": "Test title",
                     "body": "Test body"
+                }
+            },
+            conga: {
+                route: {
+                    action: "post",
+                    name: "post"
                 }
             }
         };

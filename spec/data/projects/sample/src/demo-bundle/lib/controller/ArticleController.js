@@ -10,7 +10,7 @@ const Controller = require('../../../../../../../../lib/index').BassRestControll
  *     isPaginationEnabled=true,
  *     defaultLimit=1000,
  *     defaultSort={referenceId: 1},
- *     isIncludeRelatedSupported=true
+ *     bulk=true
  * )
  */
 module.exports = class ArticleController extends Controller {
@@ -82,6 +82,24 @@ module.exports = class ArticleController extends Controller {
 
     getGroupContext() {
         return 'ADMIN';
+    }
+
+    /**
+     * Implement this to do any custom resource permission checks
+     *
+     * @param  {Object} req
+     * @param  {Object} res
+     * @param  {Object} resource
+     * @param  {String} method      the HTTP method
+     * @return {Promise}
+     */
+    checkResourcePermissions(req, res, resource, method) {
+
+        if (resource.title == 'NO_PERMISSION') {
+            return Promise.reject({message: 'invalid permission'});
+        }
+
+        return Promise.resolve();
     }
 
 }

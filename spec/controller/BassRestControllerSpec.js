@@ -6,7 +6,7 @@ const jasmine = require('jasmine');
 const BassRestController = require('../../lib/controller/BassRestController');
 const OffsetPager = require('../../lib/query/pagination/OffsetPager');
 
-describe("Kernel", () => {
+describe("BassRestController", () => {
 
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000000;
 
@@ -69,7 +69,12 @@ describe("Kernel", () => {
                 },
                 sort: 'reference_id'
             },
-            conga: { route: {} }
+            conga: {
+                route: {
+                    action: 'list',
+                    name: 'list'
+                }
+            }
         };
 
         const res = {
@@ -101,7 +106,7 @@ describe("Kernel", () => {
                 id: id
             },
 
-            conga: { route: {} }
+            conga: { route: { action: 'get', name: 'get' } }
         };
 
         const res = {
@@ -133,7 +138,7 @@ describe("Kernel", () => {
                 id: 'this-is-an-invalid-id'
             },
 
-            conga: { route: {} }
+            conga: { route: { action: 'get', name: 'get' } }
         };
 
         const res = {
@@ -166,7 +171,7 @@ describe("Kernel", () => {
                 id: id
             },
 
-            conga: { route: {} }
+            conga: { route: { action: 'get', name: 'get' } }
         };
 
         const res = {
@@ -203,7 +208,7 @@ describe("Kernel", () => {
                 id: id
             },
 
-            conga: { route: {} }
+            conga: { route: { action: 'get', name: 'get' } }
         };
 
         const res = {
@@ -248,7 +253,7 @@ describe("Kernel", () => {
                 }
             },
 
-            conga: { route: {} }
+            conga: { route: { action: 'post', name: 'post' } }
         };
 
         const res = {
@@ -294,7 +299,7 @@ describe("Kernel", () => {
                 }
             },
 
-            conga: { route: {} }
+            conga: { route: { action: 'post', name: 'post' } }
         };
 
         const res = {
@@ -344,7 +349,7 @@ describe("Kernel", () => {
                 }
             },
 
-            conga: { route: {} }
+            conga: { route: { action: 'patch', name: 'patch' } }
         };
 
         const res = {
@@ -354,12 +359,13 @@ describe("Kernel", () => {
             },
 
             return: (data, status) => {
-                expect(status).toEqual(201);
+                expect(status).toEqual(200);
                 expect(data.context).toEqual('ADMIN');
                 expect(data.type).toEqual('article');
                 expect(data.data.id).toEqual(newId);
                 expect(data.data.title).toEqual('TITLE UPDATED FROM API');
                 expect(data.data.version).toEqual(2);
+
                 done();
             }
         };
@@ -394,7 +400,7 @@ describe("Kernel", () => {
                 }
             },
 
-            conga: { route: {} }
+            conga: { route: { action: 'patch', name: 'patch' } }
         };
 
         const res = {
@@ -429,7 +435,7 @@ describe("Kernel", () => {
                 id: newId
             },
 
-            conga: { route: {} }
+            conga: { route: { action: 'delete', name: 'delete' } }
         };
 
         const res = {

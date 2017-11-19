@@ -1,0 +1,12 @@
+# bundles to enable
+bundles:
+
+    all:
+
+        # project bundles (from src/ directory)
+        - "demo-bundle"
+
+        # core conga bundles (from node_modules/ directory)
+        - "@conga/framework-bass"
+        - "@conga/framework-rest"
+        - "@conga/framework-validation"

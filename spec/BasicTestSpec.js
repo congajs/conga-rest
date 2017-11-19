@@ -5,7 +5,7 @@ const request = require('request');
 const Kernel = require('@conga/framework/lib/kernel/TestKernel');
 const jasmine = require('jasmine');
 
-describe("REST", () => {
+describe("BASIC REST", () => {
 
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000000;
 
@@ -14,7 +14,7 @@ describe("REST", () => {
 
     beforeAll((done) => {
 
-        const p = path.join(__dirname, '..', 'spec', 'data', 'projects', 'sample', 'var', 'data', 'nedb');
+        const p = path.join(__dirname, '..', 'spec', 'data', 'projects', 'sample', 'var', 'data', 'nedb-basic');
 
         if (fs.existsSync(p)) {
             fs.removeSync(p);
@@ -22,7 +22,7 @@ describe("REST", () => {
 
         kernel = new Kernel(
             path.join(__dirname, '..', 'spec', 'data', 'projects', 'sample'),
-            'app',
+            'app-basic',
             'test',
             {}
         );
@@ -53,11 +53,11 @@ describe("REST", () => {
     // =============================================================================================
     // LIST
     // =============================================================================================
-    it("should load a list of resources", (done) => {
+    fit("should load a list of resources", (done) => {
 
         request({
 
-            uri: 'http://localhost:5555/api/articles?page[limit]=10',
+            uri: 'http://localhost:5555/api/articles?page[limit]=1',
             method: 'GET',
             json: true,
             headers: {
@@ -65,6 +65,8 @@ describe("REST", () => {
             }
 
         }, (error, response, body) => {
+
+            console.log(util.inspect(body, false, null))
 
             expect(response.statusCode).toEqual(200);
             expect(body.data[0].attributes['title']).toEqual('Operative 3rd generation framework');
