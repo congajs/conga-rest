@@ -29,7 +29,8 @@
     "lodash": "4.17.4",
     "moment": "^2.18.1",
     "qs": "6.4.0",
-    "recursive-readdir-sync": "1.0.6"
+    "recursive-readdir-sync": "1.0.6",
+    "pluralize": "^7.0.0"
   },
   "devDependencies": {
     "@conga/framework-bass": "congajs/conga-bass#2.0.0-dev",
@@ -38,7 +39,6 @@
     "bass-nedb": "latest",
     "fs-extra": "^4.0.0",
     "jasmine": "^2.6.0",
-    "pluralize": "^7.0.0",
     "query-string": "^4.3.4",
     "request": "^2.81.0"
   },
