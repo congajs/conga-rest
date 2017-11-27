@@ -113,3 +113,10 @@ services:
     conga.rest.mapper:
         constructor: "%conga.rest.mapper.constructor%"
         arguments: ["@conga.rest.resource.registry"]
+
+
+    # the json body parser
+    conga.express.body.parser.raw:
+        function: "@conga/framework-rest:body-parser/raw"
+        tags:
+            - { name: express.body.parser, id: "raw" }
