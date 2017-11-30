@@ -20,6 +20,12 @@ module.exports = class Avatar {
         this.url = null;
 
         /**
+         * @Bass:Field(type="Object", name="data")
+         * @Rest:Attribute(type="Object", update=false)
+         */
+        this.data = {};
+
+        /**
          * @Bass:Version
          * @Bass:Field(type="Number", name="version")
          * @Rest:Attribute(update=false)

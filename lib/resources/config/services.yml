@@ -120,3 +120,19 @@ services:
         function: "@conga/framework-rest:body-parser/raw"
         tags:
             - { name: express.body.parser, id: "raw" }
+
+    # the default upload handler types
+    conga.rest.upload.handler.simple:
+        function: "@conga/framework-rest:upload/SimpleUploadHandler"
+        tags:
+            - { name: conga.rest.upload.handler, id: "simple" }
+
+    conga.rest.upload.handler.multipart:
+        function: "@conga/framework-rest:upload/MultipartUploadHandler"
+        tags:
+            - { name: conga.rest.upload.handler, id: "multipart" }
+
+    conga.rest.upload.handler.resumable:
+        function: "@conga/framework-rest:upload/ResumableUploadHandler"
+        tags:
+            - { name: conga.rest.upload.handler, id: "resumable" }

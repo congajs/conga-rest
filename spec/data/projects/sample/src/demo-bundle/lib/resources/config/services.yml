@@ -4,7 +4,10 @@ parameters:
 
 services:
 
-    # demo.bundle.service:
-    #
-    #     constructor: "%demo.bundle.service.class%"
-    #     arguments: ['@service_container']
+    demo.simple.upload.service:
+        constructor: "demo-bundle:upload/SimpleUploadService"
+        arguments: ["@service_container"]
+
+    demo.resumable.upload.service:
+        constructor: "demo-bundle:upload/ResumableUploadService"
+        arguments: ["@service_container"]
