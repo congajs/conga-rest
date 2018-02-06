@@ -7,7 +7,7 @@ const request = require('request');
 const Kernel = require('@conga/framework/lib/kernel/TestKernel');
 const jasmine = require('jasmine');
 
-describe("Simple Upload", () => {
+fdescribe("Simple Upload", () => {
 
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000000;
 
