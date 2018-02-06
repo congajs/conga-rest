@@ -45,7 +45,7 @@ describe("Simple Upload", () => {
         kernel.container.get('express.server').close();
     });
 
-    fit("should upload an image using simple upload method", (done) => {
+    it("should upload an image using simple upload method", (done) => {
 
         const filePath = path.join(__dirname, 'data', 'assets', 'conga_drums.jpg');
         const fileSize = fs.statSync(filePath).size;

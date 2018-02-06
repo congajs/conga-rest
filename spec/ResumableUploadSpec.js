@@ -47,7 +47,7 @@ describe("Simple Upload", () => {
         kernel.container.get('express.server').close();
     });
 
-    fit("should upload an image using resumable upload method", (done) => {
+    it("should upload an image using resumable upload method", (done) => {
 
         const filePath = path.join(__dirname, 'data', 'assets', 'conga_drums.jpg');
         const fileSize = fs.statSync(filePath).size;
@@ -94,7 +94,7 @@ describe("Simple Upload", () => {
 
     });
 
-    fit("it should upload a file to resumable upload in chunks", (done) => {
+    it("it should upload a file to resumable upload in chunks", (done) => {
 
         const chunkSize = 256 * 16;
         const filePath = path.join(__dirname, 'data', 'assets', 'conga_drums.jpg');
