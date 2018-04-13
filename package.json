@@ -33,10 +33,10 @@
     "pluralize": "^7.0.0"
   },
   "devDependencies": {
-    "@conga/framework-bass": "congajs/conga-bass#2.0.0-dev",
-    "@conga/framework-validation": "congajs/conga-validation#2.0.0-dev",
-    "bass": "latest",
-    "bass-nedb": "latest",
+    "@conga/framework-bass": "^2.0.0",
+    "@conga/framework-validation": "^2.0.0",
+    "bass": "^1.0.0",
+    "bass-nedb": "^1.0.0",
     "fs-extra": "^4.0.0",
     "jasmine": "^2.6.0",
     "query-string": "^4.3.4",
