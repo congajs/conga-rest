@@ -1,6 +1,6 @@
 {
   "name": "@conga/framework-rest",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Conga.js bundle which adds REST functionality to a project",
   "directories": {
     "test": "test"
@@ -24,7 +24,6 @@
   "license": "MIT",
   "dependencies": {
     "@conga/annotations": "~1.0.0",
-    "@conga/framework": "~2.0.0",
     "change-case": "3.0.1",
     "lodash": "^4.17.15",
     "moment": "^2.18.1",
