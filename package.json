@@ -1,6 +1,6 @@
 {
   "name": "@conga/framework-rest",
-  "version": "2.0.6",
+  "version": "2.1.0",
   "description": "Conga.js bundle which adds REST functionality to a project",
   "directories": {
     "test": "test"
@@ -22,6 +22,12 @@
     }
   ],
   "license": "MIT",
+  "peerDependencies": {
+    "@conga/framework": "~2.1.2",
+    "@conga/framework-bass": "~2.1.0",
+    "@conga/framework-validation": "~2.1.0",
+    "bass": "~1.0.0"
+  },
   "dependencies": {
     "@conga/annotations": "~1.0.0",
     "change-case": "3.0.1",
@@ -32,8 +38,9 @@
     "recursive-readdir-sync": "1.0.6"
   },
   "devDependencies": {
-    "@conga/framework-bass": "~2.0.0",
-    "@conga/framework-validation": "~2.0.0",
+    "@conga/framework": "~2.1.2",
+    "@conga/framework-bass": "~2.1.0",
+    "@conga/framework-validation": "~2.1.0",
     "bass": "~1.0.0",
     "bass-nedb": "~1.0.0",
     "fs-extra": "^4.0.0",
